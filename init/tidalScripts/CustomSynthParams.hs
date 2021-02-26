@@ -7,3 +7,6 @@ let feedback = pF "feedback"
     -- ^^^^^^ for \theramin
 
 :}
+
+
+putStrLn "loaded CustomSynthParams.hs"

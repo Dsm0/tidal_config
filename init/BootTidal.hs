@@ -3,10 +3,14 @@
 :set prompt-cont ""
 :set -XDataKinds
 
+:cd $OGDIR
+
 -- :!sclang ~/.config/tidal/init/startup-script-form.scd &
   -- starts SuperDirt in the background
 
+:{
 import Sound.Tidal.Context
+:}
 
 -- https://github.com/ndmitchell/hoogle/blob/master/docs/Install.md
 -- :def hoogle (\x -> return $ ":!/Users/xxx/Library/Haskell/bin/hoogle --info "++x)

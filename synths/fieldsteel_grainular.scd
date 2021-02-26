@@ -12,9 +12,6 @@
 
 // ~dirt.buffers.at(\contort)[0]
 
-buf = 
-
-(
 SynthDef.new(\gs, {
 	arg sync=1, dens=20, baseDur=0.1, durRand=1, buf=0,
 	rate=1, pos=0, posSpeed=1, posRand=0,

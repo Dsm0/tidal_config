@@ -46,3 +46,5 @@ let p = streamReplace tidal
     d15 = p 15
     d16 = p 16
 :}
+
+putStrLn "loaded Targets.hs"

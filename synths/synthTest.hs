@@ -1,4 +1,4 @@
-do
+ {-# SCC "" #-} do
   hush
   d1 $ ply 2 $ n (fast 2 $ arp "up" "'13") # "testSynth2" # sus 2
      # resonance 0.1 # attack 0.1 # shape 0.3

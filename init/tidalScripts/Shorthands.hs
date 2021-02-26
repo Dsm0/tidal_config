@@ -4,4 +4,8 @@ let r = run
     e = every
     wm = whenmod
     shiftBy x = (x ~>)
+    ii x y = inside x (iter y)
 :}
+
+
+putStrLn "loaded Shorthands.hs"

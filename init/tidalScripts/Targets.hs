@@ -75,3 +75,5 @@ let setI = streamSetI tidal
     setB = streamSetB tidal
 :}
 
+
+putStrLn "loaded Targets.hs"

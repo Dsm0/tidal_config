@@ -1,6 +1,5 @@
 loadSoundFiles "ah"
-
-do
+  
   hush
   d1 $ ply 2 $ n (fast 2 $ arp "up" "'13") # "testSynth2" # sus 2
      # resonance 0.1 # attack 0.1 # shape 0.3
@@ -47,31 +46,31 @@ let mRatio = pF "mRatio"
     cRel = pF "cRel"
     release = pF "release"
 
-setcps (80/120)
+bpm 130
 
   -- pretty good
 do
   hush
   d1
-     $ fast 4
+     $ fast 2
      $ release "2 2.5 0.5 <3 4 0.2 5>"
      # n (slow 64 $ "[-24 -12]")
      # "fm_2"
-     # iScale (slow 16 $ range 0.1 2 $ saw)
+     # iScale (slow 8 $ range 0.1 2 $ saw)
      # cAttack 4
      # cRel (-2)
-     # fmIndex 4
+     # fmIndex 2
      # attack 0.02
-     # mRatio (iter 4 $ "[1 2 3 3.1]"/2)
+     # mRatio (iter 4 $ "[1 2 3 3.1]" + (0.05 * rand))
      # gain 1.4
      # distort 0.15
      # orbit 0
      # cut 1
-
   d2 $ stack
-      [fast 2 $ "[roland727:2](3,8,<0 4 5 7>)"
-       # shape 0.99 # gain 1.4 # distort 0.1
-       # orbit 0 # room 0.2 # comb 0.12 # lpf 800
+      [fast 1 $ "[808bd:5](3,8,<0 4 5 7>)"
+       # shape 0.99
+       # gain 1.2
+       # distort 0.1
       ] # cut 0
 
 do
@@ -89,6 +88,7 @@ do
 -- granular stuff
 
 d1 $ "gs"
+
 
 
 let bufpath = pS "bufpath"
