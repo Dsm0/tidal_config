@@ -143,16 +143,17 @@ let (&) = (|*|)
     fx cond pat = when cond (# gain 1) $ pat # gain 0
     note = pF "note"
     up = note
+	m = mask 
 :}
 
 
 
-:{
-do
-  dir <- getEnv "DIR"
-  let loadCuts = loadSoundFiles (dir ++ "/cuts/*")
-  return ()
-:}
+-- :{
+-- do
+--   dir <- getEnv "DIR"
+--   let loadCuts = loadSoundFiles (dir ++ "/cuts/*")
+--   return ()
+-- :}
 
 
 

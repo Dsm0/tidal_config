@@ -3,8 +3,6 @@
 :set prompt-cont ""
 :set -XDataKinds
 
-:cd $OGDIR
-
 -- :!sclang ~/.config/tidal/init/startup-script-form.scd &
   -- starts SuperDirt in the background
 
@@ -17,7 +15,8 @@ import Sound.Tidal.Context
 
 :script ~/.config/tidal/init/tidalScripts/Targets.hs
 :script ~/.config/tidal/init/tidalScripts/Transitions.hs
-:script ~/.config/tidal/init/tidalScripts/SuperDirtInterface.hs
+-- :script ~/.config/tidal/init/tidalScripts/SuperDirtInterface.hs
+--               ^^^ broken by latest version of tidal
 :script ~/.config/tidal/init/tidalScripts/Shorthands.hs
 :script ~/.config/tidal/init/tidalScripts/Func.hs
 

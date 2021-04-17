@@ -1,4 +1,4 @@
-// configure the sound server: here you could add hardware specific options
+(// configure the sound server: here you could add hardware specific options
 // see http://doc.sccode.org/Classes/ServerOptions.html
 s.options.numBuffers = 1024 * 256; // increase this if you need to load more samples
 s.options.memSize = 8192 * 32; // increase this if you get "alloc failed" messages
@@ -19,6 +19,7 @@ s.waitForBoot {
     ~dirt.soundLibrary.addSynth(\foo2);
 	~dirt.start(57120, 0 ! 12);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
+	~dirt.fileExtensions = ["wav","ogg","mp3"];
 	(
 		~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
 		~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
@@ -28,5 +29,30 @@ s.waitForBoot {
 //
 };
 //
-s.latency = 0.3; // increase this if you get "late" messages
-// ~dirt.startSendRMS
+)
+// s.latency = 0.8; // increase this if you get "late" messages
+
+// s.latency
+
+// ~dirt.startSendRMSte
+~dirt.maxLatency = 64
+
+
+s.options.memoryLocking = true
+
+(
+~dirt.loadSoundFiles("/home/will/Music/MO3/MO3_sf2_wavs")
+~dirt.loadSoundFiles("/home/will/Music/mine/Mrandom")
+)
+
+~dirt.loadSoundFiles("/home/will/Music/son_house")
+
+
+
+~dirt.loadSoundFiles("/home/will/Music/palmolive")
+~dirt.loadSoundFiles("/M/tidalSamples/customSamples/longdoom")
+~dirt.loadSoundFiles("/home/will/Music/serious_shit")
+~dirt.loadSoundFiles("/home/will/Music/aint_it_funny")
+
+
+s.sampleRate
