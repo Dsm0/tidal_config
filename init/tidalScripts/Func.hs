@@ -31,14 +31,7 @@ let (&) = (|*|)
     beginend bpat durpat = (begin bpat) # (end $ (+) <$> bpat <*> durpat)
     mpent = [0, 3, 5, 7, 10, 12]
     pent = [0, 2, 4, 7, 9, 12]
-    inverse 1 = 0
-    inverse 0 = 1
-    inverse 11 = 0
-    inverse 10 = 1
-    inv 1 = 0
-    inv 0 = 1
-    inv 11 = 0
-    inv 10 = 1
+    inv = Sound.Tidal.Context.inv
     bpm x = setcps (x/120)
     brakk samps = ((# unit "c") . (# speed "8")) $ sound (samples samps (irand 30))
     brakk4 samps = ((# unit "c") . (# speed "4")) $ sound (samples samps (irand 30))
@@ -143,7 +136,8 @@ let (&) = (|*|)
     fx cond pat = when cond (# gain 1) $ pat # gain 0
     note = pF "note"
     up = note
-	m = mask 
+    m = mask 
+    plysl x = slow x . ply x
 :}
 
 

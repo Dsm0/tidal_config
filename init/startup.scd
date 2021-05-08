@@ -20,6 +20,15 @@ s.waitForBoot {
 	~dirt.start(57120, 0 ! 12);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
 	~dirt.fileExtensions = ["wav","ogg","mp3"];
+
+	~looper = TidalLooper(~dirt);
+
+    // You can adjust these parameter even in runtime
+    ~looper.rLevel = 1.5;
+    ~looper.pLevel = 0.8;
+    ~looper.linput = 15; // Set this to your main input port.
+    ~looper.lname = "mybuffer";
+
 	(
 		~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
 		~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
@@ -41,13 +50,23 @@ s.waitForBoot {
 s.options.memoryLocking = true
 
 (
-~dirt.loadSoundFiles("/home/will/Music/MO3/MO3_sf2_wavs")
-~dirt.loadSoundFiles("/home/will/Music/mine/Mrandom")
+~dirt.loadSoundFiles("/home/will/Music/MO3/MO3_sf2_wavs");
+~dirt.loadSoundFiles("/home/will/Music/mine/Mrandom");
 )
+
+
+~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_w5_s3");
+~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_marathon");
+~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_events");
+~dirt.loadSoundFiles("/home/will/Music/shawn_kemp");
+~dirt.loadSoundFiles("/home/will/Music/halflife/*");
+~dirt.loadSoundFiles("/home/will/Music/yume_nikki");
+
 
 ~dirt.loadSoundFiles("/home/will/Music/son_house")
 
 
+s.volume = (5)
 
 ~dirt.loadSoundFiles("/home/will/Music/palmolive")
 ~dirt.loadSoundFiles("/M/tidalSamples/customSamples/longdoom")
