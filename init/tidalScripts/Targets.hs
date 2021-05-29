@@ -19,11 +19,11 @@ superdirtMessageOSC = OSC "/scMessage" $ Named ["scMessage"]
 --     p5OSC = OSC "/p5" $ Named []
 -- :}
 
--- :{
--- let nannouTarget :: Target
---     nannouTarget = superdirtTarget {oName = "nannou", oPort = 34253}
---     nannouOSC = OSC "/nannou" $ Named {required = []}
--- :}
+:{
+let nannouTarget :: Target
+    nannouTarget = superdirtTarget {oName = "nannou", oPort = 34254}
+    nannouOSC = OSC "/nannou" $ Named {requiredArgs = []}
+:}
 
 -- :{
 -- let scMessageTarget :: Target
@@ -44,14 +44,14 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 
 -- :{
 -- let osc2whTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.2", oPort = 9000}
---     osc2whOSC = OSC "/osc2wh" $ Named {required = []}
+--     osc2whOSC = OSC "/osc2wh" $ Named {requiredArgs = []}
 -- :}
 
 :{
 tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611}) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
-          -- , (nannouTarget,[superdirtShape])
+          , (nannouTarget,[superdirtShape])
           -- ,
           -- (osc2whTarget,[osc2whOSC])
           ]

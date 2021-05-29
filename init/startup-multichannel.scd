@@ -1,7 +1,7 @@
 var on, off, cc;
 var osc;
 
-
+(
 // configure the sound server: here you could add hardware specific options
 // see http://doc.sccode.org/Classes/ServerOptions.html
 s.options.numBuffers = 1024 * 256; // increase this if you need to load more samples
@@ -29,7 +29,7 @@ s.waitForBoot {
 	// figure out why it changes
 
 	~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
-
+	~dirt.fileExtensions = ["wav","aif","aiff","aifc","ogg","mp3"];
 //	SynthDef(\sy1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy3, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
@@ -59,14 +59,17 @@ s.waitForBoot {
 	SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 ~dirt.soundLibrary.addSynth(\foo1);
-~dirt.soundLibrary.addSynth(\foo2);
+~dirt.soundLibrary.addSynth(\foo2);8
 };
-
+)
 //To accept MIDI in to Tidal we need to run a bit more code - this lets SuperCollider convert MIDI inputs from your controller into OSC messages
 
 // Evaluate the block below to start the mapping MIDI -> OSC.
 
 MIDIClient.init;
+
+
+~dirt.loadSoundFiles("/home/ick/.BitwigStudio/installed-packages/1.0/samples/JoMoX/JoMoX X-Basics/111bpm_Machine_Loops");
 /*
 (
 
@@ -100,7 +103,8 @@ cc.free;
 
 */
 
+s.volume = 0
 
-
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/games/crazy_taxi/*")
 s.latency = 0.3; //increase this if you get "late" messages
 //dirt.startSendRMS
