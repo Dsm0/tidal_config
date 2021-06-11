@@ -62,6 +62,8 @@ s.options.memoryLocking = true
 ~dirt.loadSoundFiles("/home/will/Music/halflife/*");
 ~dirt.loadSoundFiles("/home/will/Music/yume_nikki");
 
+~dirt.loadSoundFiles("/home/will/Music/halflife/*");
+
 
 ~dirt.loadSoundFiles("/home/will/Music/son_house")
 
@@ -75,3 +77,5 @@ s.volume = (5)
 
 
 s.sampleRate
+
+

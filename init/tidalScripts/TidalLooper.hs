@@ -1,6 +1,6 @@
 :{
 let linput = pI "linput"
-	lname = pS "lname"
+    lname = pS "lname"
 :}
 
 putStrLn "loaded TidalLooper.hs"
