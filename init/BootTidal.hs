@@ -24,6 +24,7 @@ import Sound.Tidal.Context
 -- declarations for custom synth parameters
 :script ~/.config/tidal/init/tidalScripts/CustomSynthParams.hs
 
+:script ~/.config/tidal/init/tidalScripts/Effects.hs
 -- 
 :script ~/.config/tidal/init/tidalScripts/TidalLooper.hs
 -- optional: for P5hs and VividSynth

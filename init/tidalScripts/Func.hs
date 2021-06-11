@@ -138,6 +138,14 @@ let (&) = (|*|)
     up = note
     m = mask 
     plysl x = slow x . ply x
+    loopStriate n k p = slow n ((linger (fromRational <$> (1/n)) 
+                        . shiftBy (fromRational <$> (k/n)) 
+                        . striate (round <$> n)) p) 
+                       |* speed (fromRational <$> (1/n)) # unit (pure "c") 
+    loopStriate' n k k' p = slow n ((linger (fromRational <$> (1/n)) 
+                        . shiftBy (fromRational <$> (k/n)) 
+                        . striate (round <$> n)) $ (k' p))
+                       |* speed (fromRational <$> (1/n)) # unit (pure "c") 
 :}
 
 
