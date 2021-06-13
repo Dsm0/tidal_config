@@ -13,6 +13,21 @@ s.options.numInputBusChannels = 16; // set this to your hardware output channel 
 // boot the server and start SuperDirt
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // twelve output channels, increase if you want to pan across more channels
+
+
+	~looper = TidalLooper(~dirt);
+
+	~looper.persistPath = "~/Music/tidalLooper/";
+
+    // You can adjust these parameter even in runtime
+
+	/*
+	~looper.rLevel = 1.5;
+    ~looper.pLevel = 0.8;
+    ~looper.linput = 15; // Set this to your main input port.
+	~looper.lname = "mybuffer";
+*/
+
 	~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 	// s.sync; // optionally: wait for samples to be read
@@ -56,17 +71,20 @@ s.waitForBoot {
 
 
 
+
 	SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
-SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
-~dirt.soundLibrary.addSynth(\foo1);
-~dirt.soundLibrary.addSynth(\foo2);8
+	SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
+	~dirt.soundLibrary.addSynth(\foo1);
+	~dirt.soundLibrary.addSynth(\foo2);
 };
-)
+)c
+
 //To accept MIDI in to Tidal we need to run a bit more code - this lets SuperCollider convert MIDI inputs from your controller into OSC messages
 
 // Evaluate the block below to start the mapping MIDI -> OSC.
 
 MIDIClient.init;
+
 
 
 ~dirt.loadSoundFiles("/home/ick/.BitwigStudio/installed-packages/1.0/samples/JoMoX/JoMoX X-Basics/111bpm_Machine_Loops");
@@ -100,11 +118,35 @@ off.free;
 cc.free;
 };
 );
+include("TidalLooper")
 
 */
 
+~looper.persistLoops()
+
 s.volume = 0
 
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/games/crazy_taxi/*")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/crazy_taxi/*")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/yourLoops")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/customSamples/*")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/robo")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/rap/cosmic_void_16")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/monacoGrandPrix")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/ridgeRacer")
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/smb_step_and_roll/bgm_w4_s7")
+
+
+)
 s.latency = 0.3; //increase this if you get "late" messages
 //dirt.startSendRMS
+
+
+"/home/ick/.config/tidal/init/pulu_clock.scd".load
