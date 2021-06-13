@@ -28,7 +28,7 @@ import Sound.Tidal.Context
 -- 
 :script ~/.config/tidal/init/tidalScripts/TidalLooper.hs
 -- optional: for P5hs and VividSynth
--- :script ~/.config/tidal/init/tidalScripts/P5hs.hs
+:script ~/.config/tidal/init/tidalScripts/P5hs.hs
 -- :script ~/.config/tidal/init/tidalScripts/BootVivid.hs
 
 -- :script tidalScripts/Targets.hs

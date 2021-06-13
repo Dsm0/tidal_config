@@ -13,16 +13,16 @@ superdirtMessageOSC = OSC "/scMessage" $ Named ["scMessage"]
 :}
 
 
--- :{
--- let p5Target :: Target
---     p5Target = superdirtTarget {oName = "processing", oAddress = "192.168.1.128", oPort = 57130}
---     p5OSC = OSC "/p5" $ Named []
--- :}
-
 :{
 let nannouTarget :: Target
     nannouTarget = superdirtTarget {oName = "nannou", oPort = 34254}
     nannouOSC = OSC "/nannou" $ Named {requiredArgs = []}
+:}
+
+:{
+let p5jsDirtTarget :: Target
+    p5jsDirtTarget = superdirtTarget {oName = "p5jsDirt", oPort = 57130}
+    p5jsDirtOSC = OSC "/p5" $ Named {requiredArgs = []}
 :}
 
 -- :{
@@ -51,7 +51,7 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611}) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
-          , (nannouTarget,[superdirtShape])
+          , (p5jsDirtTarget,[p5jsDirtOSC])
           -- ,
           -- (osc2whTarget,[osc2whOSC])
           ]
