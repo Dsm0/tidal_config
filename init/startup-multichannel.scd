@@ -77,7 +77,7 @@ s.waitForBoot {
 	~dirt.soundLibrary.addSynth(\foo1);
 	~dirt.soundLibrary.addSynth(\foo2);
 };
-)c
+)
 
 //To accept MIDI in to Tidal we need to run a bit more code - this lets SuperCollider convert MIDI inputs from your controller into OSC messages
 
@@ -126,27 +126,46 @@ include("TidalLooper")
 
 s.volume = 0
 
+(
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/crazy_taxi/*");
 
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/crazy_taxi/*")
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/yourLoops");
 
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/yourLoops")
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/customSamples/*");
 
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/customSamples/*")
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/*");
 
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/robo")
-
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/rap/cosmic_void_16")
-
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/monacoGrandPrix")
-
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/ridgeRacer")
-
-~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/smb_step_and_roll/bgm_w4_s7")
+// WARNING: 92 files, takes up 1343mb, make sure you have enough mem. allocated
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/fzerogx");
 
 
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/tekken3");
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/rap/cosmic_void_16");
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/monacoGrandPrix");
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/ridgeRacer");
+
+~dirt.loadSoundFiles("/media/ick/5EB068D0139EDA18/tidalSamples/games/smb_step_and_roll/bgm_w4_s7");
+
+
+~dirt.loadSoundFiles("/home/ick/Music/drumkits/glitchy_sauce");
+
+~dirt.loadSoundFiles("/home/ick/Music/drumkits/glitchy_sauce");
 )
 s.latency = 0.3; //increase this if you get "late" messages
 //dirt.startSendRMS
 
 
 "/home/ick/.config/tidal/init/pulu_clock.scd".load
+
+
+
+
+
+
+
+
+
+

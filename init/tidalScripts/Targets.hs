@@ -25,6 +25,12 @@ let p5jsDirtTarget :: Target
     p5jsDirtOSC = OSC "/p5" $ Named {requiredArgs = []}
 :}
 
+:{
+let godotTarget :: Target
+    godotTarget = superdirtTarget {oName = "godot", oPort = 14000}
+    godotOSC = OSC "/godot" $ Named {requiredArgs = []}
+:}
+
 -- :{
 -- let scMessageTarget :: Target
 --     scMessageTarget = Target {oName = "SuperDirt",
@@ -51,7 +57,8 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611}) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
-          , (p5jsDirtTarget,[p5jsDirtOSC])
+        --   , (p5jsDirtTarget,[p5jsDirtOSC])
+          , (godotTarget,[godotOSC])
           -- ,
           -- (osc2whTarget,[osc2whOSC])
           ]

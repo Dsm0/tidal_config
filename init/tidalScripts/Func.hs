@@ -151,7 +151,10 @@ let (&) = (|*|)
 
 -- for use w/ pulu's midi-clock
 :{
-let startClock = p "tick" $ "tick*4"
+let hush = do
+      streamHush tidal
+      p "tick" $ "tick*4"
+    startClock = p "tick" $ "tick*4"
     stopClock = (p "tick") silence
 :}
 
