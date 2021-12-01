@@ -19,19 +19,17 @@ let eff_q = id
     eff_Y = id
     eff_u = id
     eff_U = id
-    eff_i = id
-    eff_I = id
-    eff_o = id
-    eff_O = id
-    eff_p = id
-    eff_P = id
+    eff_i = iter 4
+    eff_I = iter 8
+    eff_p = plysl (2)
+    eff_P = plysl (3)
     eff_a = id
     eff_A = id
-    eff_s = id
+    eff_s = slow 2
     eff_S = id
-    eff_d = id
-    eff_D = id
-    eff_f = id
+    eff_d = (|+ distort (1/16))
+    eff_D = (|* distort (2))
+    eff_f = fast (2)
     eff_F = id
     eff_g = id
     eff_G = id
@@ -58,5 +56,10 @@ let eff_q = id
     eff_m = id
     eff_M = id
 :}
+
+-- consider adding functionality to change event parameters
+-- by design
+-- :{
+-- :}
 
 putStrLn "loaded Effects.hs"

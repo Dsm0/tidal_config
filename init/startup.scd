@@ -4,13 +4,10 @@ s.options.numBuffers = 1024 * 256; // increase this if you need to load more sam
 s.options.memSize = 8192 * 32; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 1024 * 32; // increase this if you are getting drop outs and the message "too many nodes"
 s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if necessary
-s.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
+s.options.numInputBusChannels = 8; // set this to your hardware output channel size, if necessary
 // boot the server and start SuperDirt
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
-	~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
-	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
-	// s.sync; // optionally: wait for samples to be read
     //
     //
     SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
@@ -26,7 +23,7 @@ s.waitForBoot {
     // You can adjust these parameter even in runtime
     ~looper.rLevel = 1.5;
     ~looper.pLevel = 0.8;
-    ~looper.linput = 15; // Set this to your main input port.
+    ~looper.linput = 4; // Set this to your main input port.
     ~looper.lname = "mybuffer";
 
 	(
@@ -35,47 +32,33 @@ s.waitForBoot {
 		~d7 = ~dirt.orbits[6]; ~d8 = ~dirt.orbits[7]; ~d9 = ~dirt.orbits[8];
 		~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 	);
+
+s.volume = (10);
+
+"/home/will/.config/tidal/init/pulu_clock.scd".load;
+~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
+// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
+// s.sync; // optionally: wait for samples to be read
+
 //
 };
 //
 )
-// s.latency = 0.8; // increase this if you get "late" messages
 
+
+// s.latency = 0.8; // increase this if you get "late" messages
 // s.latency
 
 // ~dirt.startSendRMSte
 ~dirt.maxLatency = 64
-
-
+"ah".postln;
 s.options.memoryLocking = true
 
-(
-~dirt.loadSoundFiles("/home/will/Music/MO3/MO3_sf2_wavs");
-~dirt.loadSoundFiles("/home/will/Music/mine/Mrandom");
-)
+"ah"
 
 
-~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_w5_s3");
-~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_marathon");
-~dirt.loadSoundFiles("/home/will/Music/smb_step_and_roll/bgm_events");
-~dirt.loadSoundFiles("/home/will/Music/shawn_kemp");
-~dirt.loadSoundFiles("/home/will/Music/halflife/*");
-~dirt.loadSoundFiles("/home/will/Music/yume_nikki");
 
-~dirt.loadSoundFiles("/home/will/Music/halflife/*");
+~dirt.loadSoundFiles("/run/media/will/C052-0E64/Music/games/fishdom_sounds")
 
 
-~dirt.loadSoundFiles("/home/will/Music/son_house")
-
-
-s.volume = (5)
-
-~dirt.loadSoundFiles("/home/will/Music/palmolive")
-~dirt.loadSoundFiles("/M/tidalSamples/customSamples/longdoom")
-~dirt.loadSoundFiles("/home/will/Music/serious_shit")
-~dirt.loadSoundFiles("/home/will/Music/aint_it_funny")
-
-
-s.sampleRate
-
-
+~dirt.loadSoundFiles("/run/media/will/C052-0E64/Music/games/crazy_taxi/Gus")

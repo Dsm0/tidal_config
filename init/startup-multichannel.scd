@@ -15,9 +15,7 @@ s.waitForBoot {
 	~dirt = SuperDirt(2, s); // twelve output channels, increase if you want to pan across more channels
 
 
-	~looper = TidalLooper(~dirt);
 
-	~looper.persistPath = "~/Music/tidalLooper/";
 
     // You can adjust these parameter even in runtime
 
@@ -45,6 +43,17 @@ s.waitForBoot {
 
 	~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
 	~dirt.fileExtensions = ["wav","aif","aiff","aifc","ogg","mp3"];
+
+
+
+	~looper = TidalLooper(~dirt);
+
+    // You can adjust these parameter even in runtime
+    ~looper.rLevel = 1.5;
+    ~looper.pLevel = 0.8;
+    ~looper.linput = 15; // Set this to your main input port.
+    ~looper.lname = "mybuffer";
+	~looper.persistPath = "~/Music/tidalLooper/";
 //	SynthDef(\sy1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy3, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
@@ -69,7 +78,7 @@ s.waitForBoot {
 //	~dirt.loadSoundFiles("/run/media/will/5EB068D0139EDA18/customSamples/*");
 //	~dirt.loadSoundFiles("/M/Documents/unsorted_wavs");
 
-
+zz
 
 
 	SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
