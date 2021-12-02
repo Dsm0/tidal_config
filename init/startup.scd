@@ -16,7 +16,7 @@ s.waitForBoot {
     ~dirt.soundLibrary.addSynth(\foo2);
 	~dirt.start(57120, 0 ! 12);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
-	~dirt.fileExtensions = ["wav","ogg","mp3"];
+	~dirt.fileExtensions = ["wav","ogg","mp3","aiff"];
 
 	~looper = TidalLooper(~dirt);
 
@@ -25,6 +25,7 @@ s.waitForBoot {
     ~looper.pLevel = 0.8;
     ~looper.linput = 4; // Set this to your main input port.
     ~looper.lname = "mybuffer";
+	~looper.persistPath = "~/Music/TidalLoops/" + Date.getDate.stamp + "/";
 
 	(
 		~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
@@ -44,6 +45,9 @@ s.volume = (10);
 };
 //
 )
+
+
+~looper.persistLoops("recm")
 
 
 // s.latency = 0.8; // increase this if you get "late" messages
