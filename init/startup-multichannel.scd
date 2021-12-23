@@ -78,14 +78,14 @@ s.waitForBoot {
 //	~dirt.loadSoundFiles("/run/media/will/5EB068D0139EDA18/customSamples/*");
 //	~dirt.loadSoundFiles("/M/Documents/unsorted_wavs");
 
-zz
-
-
 	SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 	SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 	~dirt.soundLibrary.addSynth(\foo1);
 	~dirt.soundLibrary.addSynth(\foo2);
 };
+
+
+"/home/ick/.config/tidal/init/pulu_clock.scd".load;
 )
 
 //To accept MIDI in to Tidal we need to run a bit more code - this lets SuperCollider convert MIDI inputs from your controller into OSC messages
@@ -166,8 +166,6 @@ s.volume = 0
 s.latency = 0.3; //increase this if you get "late" messages
 //dirt.startSendRMS
 
-
-"/home/ick/.config/tidal/init/pulu_clock.scd".load
 
 
 

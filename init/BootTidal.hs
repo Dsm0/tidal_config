@@ -5,7 +5,7 @@
 :set -XFlexibleContexts
 
 -- :!sclang ~/.config/tidal/init/startup-script-form.scd &
-  -- starts SuperDirt in the background
+-- starts SuperDirt in the background
 
 :{
 import Sound.Tidal.Context
@@ -28,7 +28,7 @@ import Sound.Tidal.Context
 -- 
 :script ~/.config/tidal/init/tidalScripts/TidalLooper.hs
 -- optional: for P5hs and VividSynth
-:script ~/.config/tidal/init/tidalScripts/P5hs.hs
+-- :script ~/.config/tidal/init/tidalScripts/P5hs.hs
 -- :script ~/.config/tidal/init/tidalScripts/BootVivid.hs
 
 -- :script tidalScripts/Targets.hs
