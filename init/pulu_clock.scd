@@ -9,7 +9,7 @@
 
 (
 var clockMods, clockBeats, screenW, screenH, clockW, clockH, clockX, clockY, resizable, border;
-clockMods = [3,5,16];
+clockMods = [64,80,16];
 clockBeats = 4;
 screenW = 1440;
 screenH = 900;

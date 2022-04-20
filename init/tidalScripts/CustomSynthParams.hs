@@ -1,11 +1,13 @@
 :{
-let feedback = pF "feedback"
-    fb_amp = pF "fb_amp"
-    -- ^^^^^^ for \beam
-
-    t_rise = pF "rise"
-    -- ^^^^^^ for \theramin
-
+let -- sfm params
+    index = pF "index"
+    index2 = pF "index2"
+    detune = pF "detune"
+    matt = pF "matt"
+    mrel = pF "mrel"
+    unison = pF "unison"
+    -- acid params
+    acid_gate = pF "acid_gate"
 :}
 
 

@@ -4,7 +4,7 @@
 		dirtEvent.sendSynth('comb_delay' ++ ~dirt.numChannels
 		)
 	}, { ~comb_delay.notNil });
-)
+);
 
 (
 	SynthDef("comb_delay" ++ ~dirt.numChannels, { |out,comb_delay=0.5,decaytime=0.1,decaysus=0.1|
@@ -15,4 +15,4 @@
 	},[\ir]).add;
 )
 
-~dirt.modules
+// ~dirt.modules

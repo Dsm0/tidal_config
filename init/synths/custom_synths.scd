@@ -61,12 +61,13 @@ metadata: (
 )).add;
 
 
+
+(
 SynthDef(\pedestrian,  {
-	arg out, pan, freq = 2500, semitone = 0.452, pitch1 = 2000, resonance = 0.1, sustain = 0.5;
+	arg out, pan, freq = 2500, semitone = 0.452, pitch1 = 2000, speed = 1.0, resonance = 0.1, sustain = 0.5;
 	var source, noise, envelope;
 
-	source = SinOsc.ar(freq, 0, 0.15) * LFPulse.ar(5);
-
+	source = SinOsc.ar(freq*speed, 0, 0.15) * LFPulse.ar(5);
 
     OffsetOut.ar(out, DirtPan.ar((source) * 4.dbamp, ~dirt.numChannels, pan));
 },
@@ -76,9 +77,7 @@ metadata: (
   tags: [\beeping, \misc]
 )
 ).add;
-
-
-);
+)
 
 
 

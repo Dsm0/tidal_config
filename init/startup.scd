@@ -46,8 +46,39 @@ s.volume = (10);
 //
 )
 
+(
+~dirt.stop();
+~dirt.freeAllSoundFiles;
+s.stop;
+)
+
+// TODO: find a way to auto-load effects and synths
+
+
+// EFFECTS
+"/home/will/.config/tidal/init/effects/mid-side.scd".load
+"/home/will/.config/tidal/init/effects/comb_delay.scd".load
+"/home/will/.config/tidal/init/effects/fm.scd".load
+
+s.loadSynthDefs("/home/will/.config/tidal/init/effects/")
+
+
+// SYNTHS
+"/home/will/.config/tidal/init/synths/beam_synth.scd".load
+"/home/will/.config/tidal/init/synths/loopier_synthdefs/synthdef-brute.scd".load
+
+
+// NOTE: MAY OR MAY NOT WORK
+~dirt.loadSynthDefs("/home/will/.config/tidal/init/synths/")
+
+
+~dirt.loadSoundFiles;
 
 ~looper.persistLoops("recm")
+
+~dirt.modules[30]
+
+~dirt.freeAllSoundFiles
 
 
 // s.latency = 0.8; // increase this if you get "late" messages
@@ -57,12 +88,3 @@ s.volume = (10);
 ~dirt.maxLatency = 64
 "ah".postln;
 s.options.memoryLocking = true
-
-"ah"
-
-
-
-~dirt.loadSoundFiles("/run/media/will/C052-0E64/Music/games/fishdom_sounds")
-
-
-~dirt.loadSoundFiles("/run/media/will/C052-0E64/Music/games/crazy_taxi/Gus")

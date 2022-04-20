@@ -147,18 +147,26 @@ let (&) = (|*|)
                         . striate (round <$> n)) $ (k' p))
                        |* speed (fromRational <$> (1/n)) # unit (pure "c") 
 :}
+ 
+:{
+let unsoloAll = do
+      mapM_ unsolo [1..9]
+      p "tick" $ "tick*4"
+:}
 
 
 -- for use w/ pulu's midi-clock
 :{
 let hush = do
       streamHush tidal
+      unsoloAll
       p "tick" $ "tick*4"
     startClock = p "tick" $ "tick*4"
     stopClock = (p "tick") silence
 :}
-
-
+ -- :t map unsolo [1..9]
+ 
+     -- unsolos all streams
 
 -- :{
 -- do
