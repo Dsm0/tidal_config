@@ -9,29 +9,30 @@
 
 (
 var clockMods, clockBeats, screenW, screenH, clockW, clockH, clockX, clockY, resizable, border;
-clockMods = [64,80,16];
+clockMods = [8,8*2,8*3,8*4,8*5,8*6,8*7,8*8].reverse;
 clockBeats = 4;
-screenW = 1440;
-screenH = 900;
-clockW = 200;
-clockH = 22;
+screenW = 1000;
+screenH = 500;
+clockW = 20;
+clockH = 180;
 clockX = screenW - clockW;
 clockY = screenH - 1;
-resizable = false;
+resizable = true;
 border = false;
+
 
 ~clockText = StaticText()
 .string_("[clock]")
-.font_(Font.defaultMonoFace)
-.align_(\center)
+.font_(Font.monospace(15))
+.align_(\right)
 .stringColor_(Color(1,1,1))
 .minHeight_(20);
 
 ~updateClock = { |cycle|
     var text, beat;
-    text = clockMods.collect { |m| "" ++ (cycle.floor.asInteger.mod(m) + 1) ++ "/" ++ m; }.join(" ");
+    text = clockMods.collect { |m| "" ++ (cycle.floor.asInteger.mod(m) + 1) ++ "/" ++ m; }.join("\n");
     beat = (cycle.mod(1)*clockBeats).round.asInteger + 1;
-    text = text ++ " " ++ clockBeats.collect { |i| if(i < beat, ".", " "); }.join;
+    text = text ++ "\n" ++ clockBeats.collect { |i| if(i < beat, "▉ ", ""); }.join;
     ~clockText.string_(text);
 };
 
@@ -40,7 +41,7 @@ border = false;
 .layout_(
     HLayout(
         ~clockText
-    ).margins_(0!4)
+    ).margins_(0!2)
 );
 
 ~clockWindow.alwaysOnTop_(true);

@@ -150,6 +150,7 @@ let (&) = (|*|)
  
 :{
 let unsoloAll = do
+      streamUnsolo tidal "tick"
       mapM_ unsolo [1..9]
       p "tick" $ "tick*4"
 :}
@@ -165,7 +166,24 @@ let hush = do
     stopClock = (p "tick") silence
 :}
  -- :t map unsolo [1..9]
+
+
+:{
+let solo x = do
+      -- streamUnsolo tidal "tick"
+      streamSolo tidal x
+      streamSolo tidal "tick"
+      -- p "tick" $ "tick*4"
+:}
  
+:{
+let unsolo x = do
+      streamUnsolo tidal "tick"
+      streamUnsolo tidal x
+      -- p "tick" $ "tick*4"
+:}
+
+
      -- unsolos all streams
 
 -- :{
