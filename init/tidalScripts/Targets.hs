@@ -57,10 +57,9 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611}) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
-        --   , (p5jsDirtTarget,[p5jsDirtOSC])
-          , (godotTarget,[godotOSC])
-          -- ,
-          -- (osc2whTarget,[osc2whOSC])
+          -- , (p5jsDirtTarget,[p5jsDirtOSC])
+          -- , (godotTarget,[godotOSC])
+          -- , (osc2whTarget,[osc2whOSC])
           ]
 :}
 
