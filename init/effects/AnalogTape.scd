@@ -38,3 +38,20 @@ SynthDef("tape" ++ ~dirt.numChannels, {
 // Quarks.gui
 
 // Platform.userExtensionDir
+
+(
+SynthDef("loud" ++ ~dirt.numChannels, { |out, loud = 0|
+		var signal = In.ar(out, ~dirt.numChannels);
+		signal = (1 + loud) * signal / (1 + (loud * abs(signal)));
+	signal = abs(signal);
+		ReplaceOut.ar(out, signal)
+}, [\ir, \ir]).add;
+)
+
+(
+~dirt.addModule('loud', { |dirtEvent|
+	dirtEvent.sendSynth('loud' ++ ~dirt.numChannels,
+		[loud: ~loud,
+		 out: ~out])
+}, { ~loud.notNil}); // play effect only if tape value was given
+);

@@ -51,25 +51,25 @@ let _jumpIn = bindTransition jumpIn
   
 :}
 
-let bindTransition transition time stream streamNum p = transition streamNum time $ p
-
-let _jumpIn = bindTransition jumpIn -- 1 p 1
-
-:t p 1 . (|< orbit 1)
-
-let d1_ = p 1
-let d1_ = p 1 . (|< orbit 1)
-:t d1_
-
-_jumpIn 1 p 1 . (|< orbit 1) $ "808bd*4" & gain 1.3
-_jumpIn 1 d1_ $ "808bd*4" & gain 1.3
-
-_jumpIn 1 
-
-d1 $ "808bd*4" & gain 1.3
-
-
-:t d1_
-:t p 1
-
-_jumpIn 1 p 1 $ "808bd*4" & gain 1.3
+-- let bindTransition transition time stream streamNum p = transition streamNum time $ p
+-- 
+-- let _jumpIn = bindTransition jumpIn -- 1 p 1
+-- 
+-- :t p 1 . (|< orbit 1)
+-- 
+-- let d1_ = p 1
+-- let d1_ = p 1 . (|< orbit 1)
+-- :t d1_
+-- 
+-- _jumpIn 1 p 1 . (|< orbit 1) $ "808bd*4" & gain 1.3
+-- _jumpIn 1 d1_ $ "808bd*4" & gain 1.3
+-- 
+-- _jumpIn 1 
+-- 
+-- d1 $ "808bd*4" & gain 1.3
+-- 
+-- 
+-- :t d1_
+-- :t p 1
+-- 
+-- _jumpIn 1 p 1 $ "808bd*4" & gain 1.3

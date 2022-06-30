@@ -23,6 +23,7 @@ s.waitForBoot {
     // You can adjust these parameter even in runtime
     ~looper.rLevel = 1.5;
     ~looper.pLevel = 0.8;
+
     ~looper.linput = 4; // Set this to your main input port.
     ~looper.lname = "mybuffer";
 	~looper.persistPath = "~/Music/TidalLoops/" + Date.getDate.stamp + "/";
@@ -43,6 +44,7 @@ s.volume = (10);
 
 //
 };
+
 //
 )
 
@@ -52,8 +54,9 @@ s.volume = (10);
 s.stop;
 )
 
-// TODO: find a way to auto-load effects and synths
-
+// post all sample info
+//
+~dirt.postSampleInfo
 
 // EFFECTS
 "/home/will/.config/tidal/init/effects/mid-side.scd".load

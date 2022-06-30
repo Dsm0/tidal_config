@@ -10,7 +10,7 @@
 (
 var clockMods, clockBeats, screenW, screenH, clockW, clockH, clockX, clockY, resizable, border;
 clockMods = [8,8*2,8*3,8*4,8*5,8*6,8*7,8*8].reverse;
-clockBeats = 4;
+clockBeats = 16;
 screenW = 1000;
 screenH = 500;
 clockW = 20;
@@ -28,11 +28,38 @@ border = false;
 .stringColor_(Color(1,1,1))
 .minHeight_(20);
 
+// lazy but intuitive
+~beat_viz = [
+ "▉ ",
+ "▆ ",
+ "▄ ",
+ "▂ ",
+
+ "▉ ▉ ",
+ "▆ ▆ ",
+ "▄ ▄ ",
+ "▂ ▂ ",
+
+ "▉ ▉ ▉ ",
+ "▆ ▆ ▆ ",
+ "▄ ▄ ▄ ",
+ "▂ ▂ ▂ ",
+
+ "▉ ▉ ▉ ▉ ",
+ "▆ ▆ ▆ ▆ ",
+ "▄ ▄ ▄ ▄ ",
+ "▂ ▂ ▂ ▂ "
+];
+// get something that lets you anticipate beats more
+
+
 ~updateClock = { |cycle|
     var text, beat;
     text = clockMods.collect { |m| "" ++ (cycle.floor.asInteger.mod(m) + 1) ++ "/" ++ m; }.join("\n");
     beat = (cycle.mod(1)*clockBeats).round.asInteger + 1;
-    text = text ++ "\n" ++ clockBeats.collect { |i| if(i < beat, "▉ ", ""); }.join;
+    text = text ++ "\n" ++ ~beat_viz[beat-1];
+    // text = text ++ "\n" ++ clockBeats.collect { |i| if(i < beat, "▉ ", ""); }.join;
+    text = text ++ "\n" ++ (beat.asString);
     ~clockText.string_(text);
 };
 

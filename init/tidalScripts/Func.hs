@@ -147,12 +147,16 @@ let (&) = (|*|)
                         . striate (round <$> n)) $ (k' p))
                        |* speed (fromRational <$> (1/n)) # unit (pure "c") 
 :}
- 
+
+:{
+let tickSpeed = 16
+:}
+
 :{
 let unsoloAll = do
       streamUnsolo tidal "tick"
       mapM_ unsolo [1..9]
-      p "tick" $ "tick*4"
+      p "tick" $ fast tickSpeed "tick"
 :}
 
 
@@ -160,9 +164,9 @@ let unsoloAll = do
 :{
 let hush = do
       streamHush tidal
-      unsoloAll
-      p "tick" $ "tick*4"
-    startClock = p "tick" $ "tick*4"
+      -- unsoloAll
+      p "tick" $ fast tickSpeed "tick"
+    startClock = p "tick" $ (fast tickSpeed "tick")
     stopClock = (p "tick") silence
 :}
  -- :t map unsolo [1..9]
