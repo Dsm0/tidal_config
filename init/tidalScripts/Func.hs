@@ -178,13 +178,18 @@ let solo x = do
       streamSolo tidal x
       streamSolo tidal "tick"
       -- p "tick" $ "tick*4"
+      p "tick" $ fast tickSpeed "tick"
 :}
  
 :{
+-- known issue: if you solo 2 streams, then unsolo one, 
+-- the tick stops, even though it's started back up again in the next line
 let unsolo x = do
-      streamUnsolo tidal "tick"
       streamUnsolo tidal x
-      -- p "tick" $ "tick*4"
+      streamUnsolo tidal "tick"
+      asap $ fast tickSpeed "tick" 
+      -- for some reason, if you stream something fast 
+      p "tick" $ fast tickSpeed "tick"
 :}
 
 
