@@ -48,6 +48,8 @@ s.volume = (10);
 //
 )
 
+Font.monospace
+
 (
 ~dirt.stop();
 ~dirt.freeAllSoundFiles;

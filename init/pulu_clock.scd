@@ -61,7 +61,7 @@ border = false;
     beat = (cycle.mod(1)*clockBeats).round.asInteger + 1;
     text = text ++ "\n" ++ ~beat_viz[beat-1];
     // text = text ++ "\n" ++ clockBeats.collect { |i| if(i < beat, "▉ ", ""); }.join;
-    text = text ++ "\n" ++ (beat.asString);
+    // text = text ++ "\n" ++ (beat.asString);
     ~clockText.string_(text);
 };
 
