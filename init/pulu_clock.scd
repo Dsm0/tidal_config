@@ -23,7 +23,7 @@ border = false;
 
 ~clockText = StaticText()
 .string_("[clock]")
-.font_(Font("undefined",15))
+.font_(Font("undefined",25))
 .align_(\right)
 .stringColor_(Color(1,1,1))
 .minHeight_(20);

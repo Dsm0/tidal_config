@@ -48,14 +48,24 @@ let eff_q = (# squiz (3/2))
     eff_C = (# cut 1)
     eff_v = id
     eff_V = id
-    eff_b = brak
-    eff_B = id
+    eff_b = shiftBy (1/4)
+    eff_B = shiftBy (1/8)
     eff_n = (|+ n 1)
     eff_N = (|- n 1)
     eff_m = (# smear (1/2))
     eff_M = (# smear (2))
     eff_o = (# coarse 4)
     eff_O = (|* coarse 2)
+    eff_1 = id
+    eff_2 = id
+    eff_3 = id
+    eff_4 = id
+    eff_5 = id
+    eff_6 = id
+    eff_7 = id
+    eff_8 = id
+    eff_9 = id
+    eff_0 = id
 :}
 
 -- consider adding functionality to change event parameters
