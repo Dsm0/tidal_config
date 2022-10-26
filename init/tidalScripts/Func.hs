@@ -146,6 +146,9 @@ let (&) = (|*|)
                         . shiftBy (fromRational <$> (k/n)) 
                         . striate (round <$> n)) $ (k' p))
                        |* speed (fromRational <$> (1/n)) # unit (pure "c") 
+    screw = jux ((shiftBy (2/4)).(# cut (29) ))
+    screw' x = jux ((shiftBy (2/4)).(# cut (29) ). x)
+    dtf x y z = (# delay x) . (# delaytime y) . (# delayfb z)
 :}
 
 :{

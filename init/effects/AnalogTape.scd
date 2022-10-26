@@ -32,7 +32,7 @@ SynthDef("tape" ++ ~dirt.numChannels, {
 	ReplaceOut.ar(out, new_signal)
 
 }).add;
-)
+);
 
 // ~dirt.modules;
 // Quarks.gui
@@ -46,7 +46,7 @@ SynthDef("loud" ++ ~dirt.numChannels, { |out, loud = 0|
 	signal = abs(signal);
 		ReplaceOut.ar(out, signal)
 }, [\ir, \ir]).add;
-)
+);
 
 (
 ~dirt.addModule('loud', { |dirtEvent|

@@ -38,6 +38,11 @@ s.waitForBoot {
 s.volume = (10);
 
 "/home/will/.config/tidal/init/pulu_clock.scd".load;
+"/home/will/.config/tidal/init/effects/sidechain.scd".load;
+
+"/home/will/.config/tidal/init/effects/AnalogTape.scd".load;
+
+
 ~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 // for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 // s.sync; // optionally: wait for samples to be read
@@ -47,6 +52,26 @@ s.volume = (10);
 
 //
 )
+
+
+(
+
+"/home/will/.config/tidal/init/pulu_clock.scd".load;
+
+)
+
+
+
+
+// Quarks.install("https://github.com/calumgunn/StageMaster.git");
+
+(
+StageMaster.deactivate;
+
+StageMaster.activate(numChannels: 2, compThreshold: 0.7, limiterLevel: 1.5, highEndDb: 1.5);
+)
+
+
 
 Font.monospace
 

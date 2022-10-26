@@ -30,6 +30,18 @@ let godotTarget :: Target
     godotTarget = superdirtTarget {oName = "godot", oPort = 14000}
     godotOSC = OSC "/godot" $ Named {requiredArgs = []}
 :}
+ 
+
+
+
+-- :{
+-- let patternTarget = OSCTarget { oName = "Pattern handler", oAddress = "127.0.0.1", oPort = 5050, oPath = "/trigger/something", oShape = Nothing, oLatency = 0.02, oPreamble = [], oTimestamp = BundleStamp }
+--     -- OSCTarget for play music via SuperCollider.
+--     musicTarget = superdirtTarget { oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120 }
+--     config = defaultConfig {cFrameTimespan = 1/20}
+--  -- Send pattern as osc both to SC and to tidal-vis
+--     tidal <- startMulti [musicTarget, patternTarget] config
+-- :}
 
 -- :{
 -- let scMessageTarget :: Target
@@ -59,6 +71,7 @@ tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611})
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
           -- , (p5jsDirtTarget,[p5jsDirtOSC])
           -- , (godotTarget,[godotOSC])
+          , (nannouTarget,[nannouOSC])
           -- , (osc2whTarget,[osc2whOSC])
           ]
 :}
