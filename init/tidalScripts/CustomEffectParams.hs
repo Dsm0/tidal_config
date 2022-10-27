@@ -17,6 +17,7 @@ let -- midside
     tape_drive = pF "tape_drive"
     tape_oversample = pI "tape_oversample"
     tape_mode = pI "tape_mode"
+    soundin = pI "soundin" -- change input bus
 :}
 
 
