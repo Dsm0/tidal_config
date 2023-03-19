@@ -3,7 +3,7 @@ import System.Environment
 
 :{
 let (&) = (|*|)
-    lofi = (crush 5.5 # shape 0.8 # lpf 700 # bandf 500 # bpq 0.4)
+    lofi = ((|+ crush (range (3) 5 $ discretize 8 $ rand)) . (# shape 0.8) . (# lpf 1200) . (# bandf 500) . (# bpq 0.1))
     ripOLD a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
     ripOLD' a b c d e p = within (a, b) (slow 2 . rev . stut c d e) p
     rip a b p = within (0.25, 0.75) (slow 2 . stutWith 8 (b/(-8)) (|* gain a)) p
@@ -40,7 +40,7 @@ let (&) = (|*|)
     move' p = foldEvery [3,4] (0.25 ~>) $ p
     move''' p = foldEvery [2,3] (0.25 ~>) $ p
     delays = [(1/512), (1/256), (1/128), (1/64), (1/32), (1/16), (1/8)]
-    randDelay p = ((# delay (range 0.5 0.7 $ shift' 5001 $ rand)) . (# delaytime (shift' 5002 $ choose delays)) . (# delayfeedback (range 0.5 0.9 $ shift' 5003 $ rand))) $ p
+    randDelay p = ((# delay (range 0.5 0.7 $ shift' 5001 $ rand)) . (# delaytime (shift' 5002 $ discretize (4) $  choose delays)) . (# delayfeedback (range 0.5 0.9 $ shift' 5003 $ rand))) $ p
     crumble = slow 2 $ sound "[k*16 ~]/2 ~" # n (run 32)
     rando = randDelay
     foldEVery = foldEvery
@@ -105,7 +105,7 @@ let (&) = (|*|)
                 ("linger", linger 0.5),
                 ("sply", ply "2" . slow 2),
                 ("ply", ply "2"),
-                ("lofi",(# lofi)),
+                ("lofi",(lofi)),
                 ("louder",(& gain 1.7)),
                 ("fast", fast 8),
                 ("stut", stut 4 0.25 0.125),
@@ -152,13 +152,13 @@ let (&) = (|*|)
 :}
 
 :{
-let tickSpeed = 16
+let tickSpeed = 4
 :}
 
 :{
 let unsoloAll = do
       streamUnsolo tidal "tick"
-      mapM_ unsolo [1..9]
+      mapM_ unsolo [1,2,3,4,5,6,7,8,9]
       p "tick" $ fast tickSpeed "tick"
 :}
 

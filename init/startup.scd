@@ -22,7 +22,7 @@ s.waitForBoot {
 
     // You can adjust these parameter even in runtime
     ~looper.rLevel = 1.5;
-    ~looper.pLevel = 0.8;
+	~looper.pLevel = 0.8;
 
     ~looper.linput = 4; // Set this to your main input port.
     ~looper.lname = "mybuffer";
@@ -30,36 +30,56 @@ s.waitForBoot {
 
 	(
 		~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
-		~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
+		~d4 = ~dirt.orbits[3]; e = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
 		~d7 = ~dirt.orbits[6]; ~d8 = ~dirt.orbits[7]; ~d9 = ~dirt.orbits[8];
 		~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 	);
 
 s.volume = (10);
+thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
 
-"/home/will/.config/tidal/init/pulu_clock.scd".load;
-"/home/will/.config/tidal/init/effects/sidechain.scd".load;
+"/home/ick/.config/tidal/init/effects/sidechain.scd".load;
 
-"/home/will/.config/tidal/init/effects/AnalogTape.scd".load;
+	// "/home/ick/.config/tidal/init/effects/AnalogTape.scd".load;
 
+"/home/ick/.config/tidal/init/effects/dc_effect.scd".load;
 
 ~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 // for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 // s.sync; // optionally: wait for samples to be read
 
 //
+
+
+"/home/ick/.config/tidal/init/pulu_clock.scd".load;
+
 };
 
 //
 )
 
 
+
+s.volume = 0
+
+s.volume = 10 // love this crunch
+
+(
+// ~dirt.stop();
+~dirt.freeAllSoundFiles;
+// s.stop;
+)
+e
+
+~dirt.freeSoundFiles("sc_recs")
+
+~dirt.un
+
 (
 
 "/home/will/.config/tidal/init/pulu_clock.scd".load;
 
 )
-
 
 
 
@@ -72,14 +92,31 @@ StageMaster.activate(numChannels: 2, compThreshold: 0.7, limiterLevel: 1.5, high
 )
 
 
+Server.default.recordpath
 
 Font.monospace
 
+
 (
-~dirt.stop();
-~dirt.freeAllSoundFiles;
-s.stop;
+Patch({ arg bypass=0, ffreq=2200.0, boostcut=0.0, amp=0.1;
+    var dry, filter;
+
+    dry = SoundIn.ar([0,1]);
+
+    filter = BhobHiShelf.ar(dry, ffreq, boostcut.dbamp);
+
+    ((dry * bypass) + (filter * (bypass < 0.5))) * amp;
+}).gui
 )
+
+
+
+
+Quarks.install("https://github.com/supercollider-quarks/ddwEQ")
+
+Quarks.install("https://github.com/muellmusik/EQui")
+
+EQui.new(Rect(left: 0, top: 0, width: 0, height: 0))
 
 // post all sample info
 //
@@ -91,6 +128,8 @@ s.stop;
 "/home/will/.config/tidal/init/effects/fm.scd".load
 
 s.loadSynthDefs("/home/will/.config/tidal/init/effects/")
+
+
 
 
 // SYNTHS

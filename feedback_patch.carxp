@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CARLA-PROJECT>
+<CARLA-PROJECT VERSION='2.5'>
+ <EngineSettings>
+  <ForceStereo>false</ForceStereo>
+  <PreferPluginBridges>false</PreferPluginBridges>
+  <PreferUiBridges>true</PreferUiBridges>
+  <UIsAlwaysOnTop>false</UIsAlwaysOnTop>
+  <MaxParameters>200</MaxParameters>
+  <UIBridgesTimeout>4000</UIBridgesTimeout>
+ </EngineSettings>
+
+ <Transport>
+  <BeatsPerMinute>120</BeatsPerMinute>
+ </Transport>
+
+ <ExternalPatchbay>
+  <Connection>
+   <Source>system:capture_1</Source>
+   <Target>SuperCollider:in_7</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_1</Source>
+   <Target>PulseAudio JACK Source:front-left</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_2</Source>
+   <Target>SuperCollider:in_8</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_2</Source>
+   <Target>PulseAudio JACK Source:front-right</Target>
+  </Connection>
+  <Connection>
+   <Source>system:monitor_1</Source>
+   <Target>SuperCollider:in_1</Target>
+  </Connection>
+  <Connection>
+   <Source>system:monitor_2</Source>
+   <Target>SuperCollider:in_2</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-left</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-left</Source>
+   <Target>SuperCollider:in_3</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-right</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-right</Source>
+   <Target>SuperCollider:in_4</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>SuperCollider:in_5</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>SuperCollider:in_6</Target>
+  </Connection>
+  <Positions>
+   <Position x1="1246" y1="1261" x2="1678" y2="1414">
+    <Name>system</Name>
+   </Position>
+   <Position x1="1212" y1="1379">
+    <Name>PulseAudio JACK Sink</Name>
+   </Position>
+   <Position x1="1443" y1="1149">
+    <Name>PulseAudio JACK Source</Name>
+   </Position>
+   <Position x1="1490" y1="1238">
+    <Name>SuperCollider</Name>
+   </Position>
+  </Positions>
+ </ExternalPatchbay>
+</CARLA-PROJECT>

@@ -30,6 +30,29 @@ let godotTarget :: Target
     godotTarget = superdirtTarget {oName = "godot", oPort = 14000}
     godotOSC = OSC "/godot" $ Named {requiredArgs = []}
 :}
+
+
+:{
+let visTarget :: Target
+    visTarget = Target { oName = "Pattern handler", oAddress = "127.0.0.1", oPort = 5050, oBusPort = Nothing, oLatency = 0.02, oWindow = Nothing, oSchedule = Pre BundleStamp, oHandshake = False }
+    visOSC = OSC "/vis" $ Named {requiredArgs = []}
+
+
+:}
+ 
+
+:{
+let faustTstTarget :: Target
+    faustTstTarget = superdirtTarget {oName = "faust", oPort = 5510, oHandshake = False}
+    faustTstOSC = OSC "/gain" $ Named {requiredArgs = []}
+:}
+ 
+
+:{
+let oscdumpTarget :: Target
+    oscdumpTarget = superdirtTarget {oName = "oscdump", oPort = 5223, oSchedule = Live, oHandshake = False}
+    oscdumpOSC = OSC "/oscdump" $ Named {requiredArgs = []}
+:}
  
 
 
@@ -70,8 +93,11 @@ tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611})
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
           -- , (p5jsDirtTarget,[p5jsDirtOSC])
+          -- , (faustTstTarget,[faustTstOSC])
+          , (oscdumpTarget,[oscdumpOSC])
           -- , (godotTarget,[godotOSC])
-          , (nannouTarget,[nannouOSC])
+          -- , (visTarget,[visOSC])
+          -- , (nannouTarget,[nannouOSC])
           -- , (osc2whTarget,[osc2whOSC])
           ]
 :}
