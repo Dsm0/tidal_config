@@ -35,7 +35,7 @@ s.waitForBoot {
 		~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 	);
 
-s.volume = (10);
+s.volume = (4);
 thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
 
 "/home/ick/.config/tidal/init/effects/sidechain.scd".load;
@@ -58,20 +58,38 @@ thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standa
 //
 )
 
+QuarksGui.new;
 
+Atk
+
+Atk.downloadKernels;
+QuarksGui.new
 
 s.volume = 0
 
-s.volume = 10 // love this crunch
+s.volume = 3 // love this crunch
 
 (
 // ~dirt.stop();
 ~dirt.freeAllSoundFiles;
 // s.stop;
 )
-e
 
 ~dirt.freeSoundFiles("sc_recs")
+
+
+Platform.userExtensionDir.openOS;
+Atk
+
+Quarks.install("https://github.com/ambisonictoolkit/atk-sc3.git");
+
+(
+Atk.downloadKernels;
+Atk.downloadMatrices;
+Atk.downloadSounds;
+)
+
+
 
 ~dirt.un
 
@@ -83,7 +101,7 @@ e
 
 
 
-// Quarks.install("https://github.com/calumgunn/StageMaster.git");
+Quarks.install("https://github.com/calumgunn/StageMaster.git");
 
 (
 StageMaster.deactivate;

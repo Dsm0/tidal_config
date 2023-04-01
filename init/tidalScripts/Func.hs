@@ -2,6 +2,7 @@ import Data.List
 import System.Environment
 
 :{
+ 
 let (&) = (|*|)
     lofi = ((|+ crush (range (3) 5 $ discretize 8 $ rand)) . (# shape 0.8) . (# lpf 1200) . (# bandf 500) . (# bpq 0.1))
     ripOLD a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
@@ -9,7 +10,9 @@ let (&) = (|*|)
     rip a b p = within (0.25, 0.75) (slow 2 . stutWith 8 (b/(-8)) (|* gain a)) p
     rip' a b c d e p = within (a, b) (slow 2 . stutWith c (e/(-8)) (|* gain d)) p
     spike p = ((# delaytime (range 0.001 0.3 $ slow 7.1 sine)) . (# delayfeedback (range 0.7 0.99 $ slow 6.71 sine))) $ p
+    spikeVal val p = ((# delaytime (range 0.001 0.3 $ slow (7.1*((10 - val)/10)) sine)) . (# delayfeedback (range 0.7 0.99 $ slow 6.71 sine))) $ p
     spike' p = (# delay "0.3") $ spike $ p
+    spikeVal' val p = (# delay "0.3") $ spikeVal val $ p
     spike'' p = (# delay "0.4") $ ((# delaytime (range 0.001 0.1 $ slow 6.1 sine)) . (# delayfeedback (range 0.7 0.99 $ slow 5.71 sine))) $ p
     -- ghost'' a f p = superimpose (((a/2 + a*2) ~>) . f) $ superimpose (((a + a/2) ~>) . f) $ p
     -- ghost' a p = ghost'' a ((|* gain "0.7") . (# end "0.2") . (|* speed "1.25")) p
@@ -149,6 +152,7 @@ let (&) = (|*|)
     screw = jux ((shiftBy (2/4)).(# cut (29) ))
     screw' x = jux ((shiftBy (2/4)).(# cut (29) ). x)
     dtf x y z = (# delay x) . (# delaytime y) . (# delayfb z)
+     
 :}
 
 :{
