@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CARLA-PROJECT>
+<CARLA-PROJECT VERSION='2.5'>
+ <EngineSettings>
+  <ForceStereo>false</ForceStereo>
+  <PreferPluginBridges>false</PreferPluginBridges>
+  <PreferUiBridges>true</PreferUiBridges>
+  <UIsAlwaysOnTop>false</UIsAlwaysOnTop>
+  <MaxParameters>200</MaxParameters>
+  <UIBridgesTimeout>4000</UIBridgesTimeout>
+ </EngineSettings>
+
+ <Transport>
+  <BeatsPerMinute>120</BeatsPerMinute>
+ </Transport>
+
+ <ExternalPatchbay>
+  <Connection>
+   <Source>system:capture_1</Source>
+   <Target>PulseAudio JACK Source:front-left</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_2</Source>
+   <Target>PulseAudio JACK Source:front-right</Target>
+  </Connection>
+  <Connection>
+   <Source>system:monitor_1</Source>
+   <Target>SuperCollider:in_1</Target>
+  </Connection>
+  <Connection>
+   <Source>system:monitor_2</Source>
+   <Target>SuperCollider:in_2</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-left</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-right</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>lmao:in_1</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>ffmpeg:input_1</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>lmao:in_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>ffmpeg:input_2</Target>
+  </Connection>
+  <Connection>
+   <Source>jack_thru_client:output_1</Source>
+   <Target>SuperCollider:in_3</Target>
+  </Connection>
+  <Connection>
+   <Source>jack_thru_client:output_2</Source>
+   <Target>SuperCollider:in_4</Target>
+  </Connection>
+  <Connection>
+   <Source>excap3_tst:output_1</Source>
+   <Target>jack_thru_client:input_1</Target>
+  </Connection>
+  <Connection>
+   <Source>excap3_tst:output_2</Source>
+   <Target>jack_thru_client:input_2</Target>
+  </Connection>
+  <Positions>
+   <Position x1="1312" y1="1264" x2="1999" y2="1267">
+    <Name>system</Name>
+   </Position>
+   <Position x1="1660" y1="1228">
+    <Name>PulseAudio JACK Sink</Name>
+   </Position>
+   <Position x1="1467" y1="1186">
+    <Name>PulseAudio JACK Source</Name>
+   </Position>
+   <Position x1="1773" y1="1340">
+    <Name>SuperCollider</Name>
+   </Position>
+   <Position x1="1970" y1="1441">
+    <Name>ffmpeg</Name>
+   </Position>
+   <Position x1="1402" y1="1396">
+    <Name>jack_thru_client</Name>
+   </Position>
+   <Position x1="1668" y1="1532">
+    <Name>JACK Input Client</Name>
+   </Position>
+   <Position x1="1954" y1="1355">
+    <Name>lmao</Name>
+   </Position>
+   <Position x1="1247" y1="1425">
+    <Name>excap3_tst</Name>
+   </Position>
+  </Positions>
+ </ExternalPatchbay>
+</CARLA-PROJECT>

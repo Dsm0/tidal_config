@@ -2,15 +2,18 @@ import Data.List
 import System.Environment
 
 :{
+ 
 let (&) = (|*|)
-    lofi = (crush 5.5 # shape 0.8 # lpf 700 # bandf 500 # bpq 0.4)
+    lofi = ((|+ crush (range (3) 5 $ discretize 8 $ rand)) . (# shape 0.8) . (# lpf 1200) . (# bandf 500) . (# bpq 0.1))
     ripOLD a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
     ripOLD' a b c d e p = within (a, b) (slow 2 . rev . stut c d e) p
     rip a b p = within (0.25, 0.75) (slow 2 . stutWith 8 (b/(-8)) (|* gain a)) p
     rip' a b c d e p = within (a, b) (slow 2 . stutWith c (e/(-8)) (|* gain d)) p
     spike p = ((# delaytime (range 0.001 0.3 $ slow 7.1 sine)) . (# delayfeedback (range 0.7 0.99 $ slow 6.71 sine))) $ p
+    spikeVal val p = ((# delaytime (range 0.001 0.3 $ slow (7.1*((10 - val)/10)) sine)) . (# delayfeedback (range 0.7 0.99 $ slow 6.71 sine))) $ p
     spike' p = (# delay "0.3") $ spike $ p
-    spike'' p = (# delay "0.4") $ ((# delaytime (range 0.001 0.1 $ slow 6.1 sine)) . (# delayfeedback (range 0.7 0.99 $ slow 5.71 sine))) $ p
+    -- spikeVal' val p = (# delay (0.3 + (val /10))) $ spikeVal val $ p
+    spike'' p = (# delay "0.4") $ (# delaytime (range 0.001 0.1 $ slow 6.1 sine)) $ (# delayfeedback (range 0.7 0.99 $ slow 5.71 sine)) $ p
     -- ghost'' a f p = superimpose (((a/2 + a*2) ~>) . f) $ superimpose (((a + a/2) ~>) . f) $ p
     -- ghost' a p = ghost'' a ((|* gain "0.7") . (# end "0.2") . (|* speed "1.25")) p
     -- ghost p = ghost' 0.125 p
@@ -40,7 +43,7 @@ let (&) = (|*|)
     move' p = foldEvery [3,4] (0.25 ~>) $ p
     move''' p = foldEvery [2,3] (0.25 ~>) $ p
     delays = [(1/512), (1/256), (1/128), (1/64), (1/32), (1/16), (1/8)]
-    randDelay p = ((# delay (range 0.5 0.7 $ shift' 5001 $ rand)) . (# delaytime (shift' 5002 $ choose delays)) . (# delayfeedback (range 0.5 0.9 $ shift' 5003 $ rand))) $ p
+    randDelay p = ((# delay (range 0.5 0.7 $ shift' 5001 $ rand)) . (# delaytime (shift' 5002 $ discretize (4) $  choose delays)) . (# delayfeedback (range 0.5 0.9 $ shift' 5003 $ rand))) $ p
     crumble = slow 2 $ sound "[k*16 ~]/2 ~" # n (run 32)
     rando = randDelay
     foldEVery = foldEvery
@@ -105,7 +108,7 @@ let (&) = (|*|)
                 ("linger", linger 0.5),
                 ("sply", ply "2" . slow 2),
                 ("ply", ply "2"),
-                ("lofi",(# lofi)),
+                ("lofi",(lofi)),
                 ("louder",(& gain 1.7)),
                 ("fast", fast 8),
                 ("stut", stut 4 0.25 0.125),
@@ -149,50 +152,57 @@ let (&) = (|*|)
     screw = jux ((shiftBy (2/4)).(# cut (29) ))
     screw' x = jux ((shiftBy (2/4)).(# cut (29) ). x)
     dtf x y z = (# delay x) . (# delaytime y) . (# delayfb z)
+     
+:}
+ 
+:{
+let initds = do
+              d1 $ init 
+              d2 $ init 
+              d3 $ init 
+              d4 $ init 
+              d5 $ init 
+              d6 $ init 
+              d7 $ init 
+              d8 $ init 
+              d9 $ init 
+                where init = "bd" |* gain ("0"/10)
 :}
 
 :{
-let tickSpeed = 16
+let tickSpeed = 0
 :}
 
 :{
-let unsoloAll = do
-      streamUnsolo tidal "tick"
-      mapM_ unsolo [1..9]
-      p "tick" $ fast tickSpeed "tick"
+let unsoloAll = mapM_ unsolo [1,2,3,4,5,6,7,8,9]
 :}
 
 
 -- for use w/ pulu's midi-clock
 :{
-let hush = do
-      streamHush tidal
-      -- unsoloAll
-      p "tick" $ fast tickSpeed "tick"
-    startClock = p "tick" $ (fast tickSpeed "tick")
-    stopClock = (p "tick") silence
+let hush = streamHush tidal
 :}
  -- :t map unsolo [1..9]
 
 
 :{
-let solo x = do
+let solo x = streamSolo tidal x
       -- streamUnsolo tidal "tick"
-      streamSolo tidal x
-      streamSolo tidal "tick"
+      -- streamSolo tidal "tick"
+      
       -- p "tick" $ "tick*4"
-      p "tick" $ fast tickSpeed "tick"
+      -- p "tick" $ fast tickSpeed "tick"
 :}
  
 :{
 -- known issue: if you solo 2 streams, then unsolo one, 
 -- the tick stops, even though it's started back up again in the next line
-let unsolo x = do
-      streamUnsolo tidal x
-      streamUnsolo tidal "tick"
-      asap $ fast tickSpeed "tick" 
+let unsolo x = streamUnsolo tidal x
+      -- streamUnsolo tidal "tick"
+
+      -- asap $ fast tickSpeed "tick" 
       -- for some reason, if you stream something fast 
-      p "tick" $ fast tickSpeed "tick"
+      -- p "tick" $ fast tickSpeed "tick"
 :}
 
 

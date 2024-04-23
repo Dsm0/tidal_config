@@ -26,8 +26,11 @@ import Sound.Tidal.Context
 :script ~/.config/tidal/init/tidalScripts/CustomEffectParams.hs
 
 :script ~/.config/tidal/init/tidalScripts/Effects.hs
+
+
+
 -- 
-:script ~/.config/tidal/init/tidalScripts/TidalLooper.hs
+-- :script ~/.config/tidal/init/tidalScripts/TidalLooper.hs
 -- optional: for P5hs and VividSynth
 -- :script ~/.config/tidal/init/tidalScripts/P5hs.hs
 -- :script ~/.config/tidal/init/tidalScripts/BootVivid.hs
@@ -36,12 +39,6 @@ import Sound.Tidal.Context
 -- :script tidalScripts/Targets.hs
 -- :script tidalScripts/Targets.hs
 
--- :script /path/to/here/tidal/stream/Stream.hs
--- :script /path/to/here/tidal/lib/Lib.hs
--- :script /path/to/here/tidal/osc/targets/TargetLibs.hs
---
--- 
---
 
 -- :{
 -- do
