@@ -3,18 +3,18 @@
 s.options.numBuffers = 1024 * 256; // increase this if you need to load more samples
 s.options.memSize = 8192 * 32; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 1024 * 32; // increase this if you are getting drop outs and the message "too many nodes"
-s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if neces sary
+s.options.numOutputBusChannels = 16; // set this to your hardware output channel size, if necessary
 s.options.numInputBusChannels = 8; // set this to your hardware output channel size, if necessary
 // boot the server and start SuperDirt
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     //
-	//
-    SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
+    //
+    /*SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     ~dirt.soundLibrary.addSynth(\foo1);
-    ~dirt.soundLibrary.addSynth(\foo2);
-	~dirt.start(57120, 0 ! 12);   // start listening on port 57120, create two busses each sending audio to channel 0
+    ~dirt.soundLibrary.addSynth(\foo2);*/
+	~dirt.start(57120, outBusses: [0,2,4,6,8,10,12,14]);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
 	~dirt.fileExtensions = ["wav","ogg","mp3","aiff","opus"];
 
@@ -38,9 +38,9 @@ s.waitForBoot {
 	);
 
 	s.volume = (0);
-	thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
+	// thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
 
-	// thisProcess.platform.recordingsDir = "~/Music/sc_recs/".standardizePath;
+	thisProcess.platform.recordingsDir = "~/Music/sc_recs/".standardizePath;
 
 
 	// TODO: just get the env variable
@@ -73,7 +73,7 @@ SuperDirt
 
 
 s.volume = 0
-s.volume = 2
+s.volume = 0
 
 s.volume = 10 // love this crunch
 

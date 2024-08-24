@@ -17,26 +17,26 @@
  <ExternalPatchbay>
   <Connection>
    <Source>system:capture_1</Source>
-   <Target>SuperCollider:in_7</Target>
-  </Connection>
-  <Connection>
-   <Source>system:capture_1</Source>
    <Target>PulseAudio JACK Source:front-left</Target>
   </Connection>
   <Connection>
-   <Source>system:capture_2</Source>
-   <Target>SuperCollider:in_8</Target>
+   <Source>system:capture_1</Source>
+   <Target>SuperCollider:in_7</Target>
   </Connection>
   <Connection>
    <Source>system:capture_2</Source>
    <Target>PulseAudio JACK Source:front-right</Target>
   </Connection>
   <Connection>
+   <Source>system:capture_2</Source>
+   <Target>SuperCollider:in_8</Target>
+  </Connection>
+  <Connection>
    <Source>system:monitor_1</Source>
    <Target>SuperCollider:in_1</Target>
   </Connection>
   <Connection>
-   <Source>system:monitor_2</Source>
+   <Source>system:monitor_1</Source>
    <Target>SuperCollider:in_2</Target>
   </Connection>
   <Connection>
@@ -75,13 +75,13 @@
    <Position x1="1246" y1="1261" x2="1678" y2="1414">
     <Name>system</Name>
    </Position>
-   <Position x1="1212" y1="1379">
+   <Position x1="1180" y1="1410">
     <Name>PulseAudio JACK Sink</Name>
    </Position>
    <Position x1="1443" y1="1149">
     <Name>PulseAudio JACK Source</Name>
    </Position>
-   <Position x1="1490" y1="1238">
+   <Position x1="1446" y1="1252">
     <Name>SuperCollider</Name>
    </Position>
   </Positions>

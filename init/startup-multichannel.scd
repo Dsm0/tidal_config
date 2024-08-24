@@ -1,4 +1,4 @@
-var on, off, cc;
+12var on, off, cc;
 var osc;
 
 (
@@ -13,8 +13,6 @@ s.options.numInputBusChannels = 16; // set this to your hardware output channel 
 // boot the server and start SuperDirt
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // twelve output channels, increase if you want to pan across more channels
-
-
 
 
     // You can adjust these parameter even in runtime
@@ -44,16 +42,21 @@ s.waitForBoot {
 	~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
 	~dirt.fileExtensions = ["wav","aif","aiff","aifc","ogg","mp3"];
 
+    s.scope;
+	"/home/wil/.config/tidal/init/effects/sidechain.scd".load;
 
+	// "/home/wil/.config/tidal/init/effects/AnalogTape.scd".load;
 
-	~looper = TidalLooper(~dirt);
+	"/home/wil/.config/tidal/init/effects/multiband_comp.scd".load;
+
+	// ~looper = TidalLooper(~dirt);
 
     // You can adjust these parameter even in runtime
-    ~looper.rLevel = 1.5;
-    ~looper.pLevel = 0.8;
-    ~looper.linput = 15; // Set this to your main input port.
-    ~looper.lname = "mybuffer";
-	~looper.persistPath = "~/Music/tidalLooper/";
+	// ~looper.rLevel = 1.5;
+	// ~looper.pLevel = 0.8;
+	// ~looper.linput = 15; // Set this to your main input port.
+	// ~looper.lname = "mybuffer";
+	// 1~looper.persistPath = "~/Music/tidalLooper/";
 //	SynthDef(\sy1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 //	SynthDef(\sy3, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
@@ -82,6 +85,10 @@ s.waitForBoot {
 	SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 	~dirt.soundLibrary.addSynth(\foo1);
 	~dirt.soundLibrary.addSynth(\foo2);
+
+
+    Server.default.recChannels = 16;
+	thisProcess.platform.recordingsDir = "~/Music/sc_recs/multitrack".standardizePath;
 };
 
 
@@ -94,6 +101,12 @@ s.waitForBoot {
 
 MIDIClient.init;
 
+
+Server.default.recChannels = 16
+
+Server.default.recChannels
+
+s.volume = 0
 
 
 ~dirt.loadSoundFiles("/home/ick/.BitwigStudio/installed-packages/1.0/samples/JoMoX/JoMoX X-Basics/111bpm_Machine_Loops");

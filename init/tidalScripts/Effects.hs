@@ -68,7 +68,7 @@ let p_bpe = parseBP_E
     make_eff 'H' i = hurry ((3 + val)/8) where val = p_bpe i
     make_eff 'j' i = degradeBy (val / 10) where val = p_bpe i
     make_eff 'J' i = degradeBy (val / 100) where val = p_bpe i
-    make_eff 'k' i = rip (9/8) (3/2)
+    make_eff 'k' i = swingBy (val/16) 4 where val = p_bpe i
     make_eff 'K' i = rip (7/8) (1/"{2 1 4}%4")
     make_eff 'l' i = linger ((2 + val)/8) where val = p_bpe i
     make_eff 'L' i = if (read i :: Integer) > (-2) then linger ((2+val)/16) else linger (1/(16 - val)) where val = p_bpe i
@@ -84,7 +84,10 @@ let p_bpe = parseBP_E
     make_eff 'B' i = (shiftBy ((4*val)/8)) where val = p_bpe i
     make_eff 'n' i = (|+ n val) where val = p_bpe i
     make_eff 'N' i = (|- n val) where val = p_bpe i
-    make_eff 'm' i = (|+ smear ((val)/2)) where val = p_bpe i
+    -- make_eff 'm' i = (# multiband_comp (if val < 99 then (1/(val/16 + 0.5)-2)/(-2))) where val = p_bpe i
+    make_eff 'm' i = (# multiband_comp (if (bruh < 99) then (val/100) else ((1/(val + 0.5)-2)/(-2)))) 
+                        where bruh = read i :: Integer
+                              val = p_bpe i
     make_eff 'M' i = (|+ smear (2*val)) where val = p_bpe i
     make_eff '_' i = id
     make_eff '1' i = id
