@@ -1,4 +1,5 @@
 import qualified Data.Map as Map_
+import Sound.Tidal.Pattern
 
 -- :{
 -- let changeFunc' stream list = sendFunc' list
@@ -20,6 +21,8 @@ import qualified Data.Map as Map_
 --       -- where list = [("scMessage",VS "loadSoundFiles"),("filePath",VS path)]
 -- :}
 
+
+
 :{
 
 let changeFunc' stream list = sendFunc' list
@@ -27,7 +30,7 @@ let changeFunc' stream list = sendFunc' list
               -- where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
             makeFakeMap list_ = Map_.fromList list_
             makeFuncHelp :: [(String,Value)] -> ControlPattern
-            makeFuncHelp y = Pattern $ fakeEvent (makeFakeMap y:: ControlMap)
+            makeFuncHelp y = Pattern $ fakeEvent (makeFakeMap y:: ValueMap)
               where fakeEvent a notARealArgument = [(toEvent' 0 1 0 1) a]
             makeFunc :: [(String,Value)] -> [ControlPattern]
             makeFunc x = [makeFuncHelp x]

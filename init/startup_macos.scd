@@ -3,18 +3,18 @@
 s.options.numBuffers = 1024 * 256; // increase this if you need to load more samples
 s.options.memSize = 8192 * 32; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 1024 * 32; // increase this if you are getting drop outs and the message "too many nodes"
-s.options.numOutputBusChannels = 16; // set this to your hardware output channel size, if necessary
+s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if neces sary
 s.options.numInputBusChannels = 8; // set this to your hardware output channel size, if necessary
 // boot the server and start SuperDirt
+s.options.sampleRate = 44100;
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     //
-    //
-    /*SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
+    SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     ~dirt.soundLibrary.addSynth(\foo1);
-    ~dirt.soundLibrary.addSynth(\foo2);*/
-	~dirt.start(57120, outBusses: [0,2,4,6,8,10,12,14]);   // start listening on port 57120, create two busses each sending audio to channel 0
+    ~dirt.soundLibrary.addSynth(\foo2);
+	~dirt.start(57120, 0 ! 14);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
 	~dirt.fileExtensions = ["wav","ogg","mp3","aiff","opus"];
 
@@ -37,18 +37,22 @@ s.waitForBoot {
 		~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 	);
 
+
+	"ahhhh".postln;
 	s.volume = (0);
 	// thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
 
-	thisProcess.platform.recordingsDir = "~/Music/sc_recs/".standardizePath;
+	thisProcess.platform.recordingsDir = "~/Music/sc_recs".standardizePath;
+
+	// thisProcess.platform.recordingsDir = "~/Music/sc_recs/".standardizePath;
 
 
 	// TODO: just get the env variable
-	"/home/wil/.config/tidal/init/effects/sidechain.scd".load;
+	"/Users/will/.config/tidal/init/effects/sidechain.scd".load;
 
 	// "/home/wil/.config/tidal/init/effects/AnalogTape.scd".load;
 
-	"/home/wil/.config/tidal/init/effects/multiband_comp.scd".load;
+	"/Users/will/.config/tidal/init/effects/multiband_comp.scd".load;
 
 	~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 // for example: ~d kljirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
@@ -61,7 +65,53 @@ s.waitForBoot {
 //
 )
 
+
+
+ServerOptions.devices
+
+s.o.devices
+
+
+
+
+(
+// for SuperDirtMixer
+~mixer = SuperDirtMixer(~dirt);
+~mixer.setMasterBus(0);
+~mixer.setOrbitLabels(["d1 - Lead", "d2 - Bass", "d3 - Key", "d4 - Pad"]);
+~mixer.gui;
+)
+
+
+runInTerminal("xattr -d -r com.apple.quarantine" + shellQuote(Platform.userExtensionDir +/+ "nn.ar"))
+(
+// for tidal-rave
+
+)
+
+
 SuperDirt
+Quarks.gui
+
+
+this.interpret("~dirt.loadSoundFiles(\"/Volumes/LaCie/sd_backup_08_25_2024/Music/old_packs/VoiceSpectral_cut/vspectral102/\")")
+
+
+s.volume = -12
+
+
+s.options.outDevice = "BlackHole 64ch";
+
+s.options.outDevice
+
+s.options.outDevice = "External Headphones"
+
+
+ScaleLP.aeolian
+
+ServerOptions.devices
+
+
 
 "/home/wil/Documents/tidalComps/dj_dave_remix/samples/Passenger_Woman2/*".pathMatch
 
@@ -70,10 +120,10 @@ SuperDirt
 "/home/wil/.config/tidal/init/pulu_clock_no_tick.scd".load;
 
 
-Buffer
+
 
 s.volume = 0
-s.volume = 0
+s.volume = 2
 
 s.volume = 10 // love this crunch
 
@@ -95,7 +145,6 @@ Quarks.gui
 
 )
 
-2+2
 
 
 // Quarks.install("https://github.com/calumgunn/StageMaster.git");

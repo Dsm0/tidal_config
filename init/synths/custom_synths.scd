@@ -33,7 +33,7 @@ metadata: (
   category: \drums,
   tags: [\pitched, \snare, \sos]
 )).add;
-
+)
 
 
 
@@ -67,18 +67,37 @@ SynthDef(\pedestrian,  {
 	arg out, pan, freq = 2500, semitone = 0.452, pitch1 = 2000, speed = 1.0, resonance = 0.1, sustain = 0.5;
 	var source, noise, envelope;
 
-	source = SinOsc.ar(freq*speed, 0, 0.15) * LFPulse.ar(5);
+	source = SinOsc.ar(freq*speed, 0, 0.15) * LFPulse.ar(freq/32);
 
-    OffsetOut.ar(out, DirtPan.ar((source) * 4.dbamp, ~dirt.numChannels, pan));
+    noise = Latch.ar(WhiteNoise.ar(0.1), Impulse.ar(1700 * 2));
+	noise = BRF.ar(noise, 2*freq, resonance,0.5);
+
+	envelope = Env.perc(0.005, sustain, 0.5, -4).ar(Done.freeSelf);
+
+    OffsetOut.ar(out, DirtPan.ar((source + noise) * 4.dbamp, ~dirt.numChannels, pan,envelope));
 },
 metadata: (
   credit: "C_ROBO",
   category: \soundfx,
   tags: [\beeping, \misc]
+)).add;
 )
-).add;
+
+
+
+(
+SynthDef(\xyPos, {
+	arg out, x=0, y=0.4, pan, sustain;
+    var sig, envelope;
+    x = x.clip(-1, 1);
+    y = y.clip(-1, 1);
+    sig = [DC.ar(x), DC.ar(y)];
+	// Out.ar(0, sig);
+	// sig = SinOsc.ar(440);
+
+	envelope = Env.perc(0.005, sustain, 0.5, -4).ar(Done.freeSelf);
+
+	OffsetOut.ar(out, DirtPan.ar(sig * 4.dbamp, ~dirt.numChannels, pan, envelope));
+}).add;
 )
-
-
-
 

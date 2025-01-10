@@ -3,7 +3,7 @@ import Sound.Tidal.Context
 -- import Control.Concurrent.MVar (readMVar)
 import qualified Control.Monad as CM
 import qualified Sound.Tidal.Stream
-import qualified Sound.Tidal.Tempo as T
+-- import qualified Sound.Tidal.Tempo as T
 
 
 -- used for sending custom calls to superdirt functions on a specific OSC path
@@ -55,6 +55,47 @@ let oscdumpTarget :: Target
 :}
  
 
+:{
+let touchdesignerTarget :: Target
+    touchdesignerTarget = superdirtTarget {oName = "touchdesigner", oPort = 5224, oSchedule = Live, oHandshake = False}
+    touchdesignerOSC = OSC "/touchdesigner" $ Named {requiredArgs = []}
+:}
+ 
+
+:{
+let ericTarget :: Target
+    ericTarget = superdirtTarget {oAddress = "192.168.1.2", oPort = 5432, oHandshake = False}
+    ericOSC = OSC "/freq" $ Named {requiredArgs = []}
+:}
+
+
+:{
+let liveTarget = Target {oName = "Max", -- Give your target a name
+                      oAddress = "127.0.0.1", -- the target network address
+                      oPort = 2020, -- the target network port
+                      oLatency = 0.1, -- the latency (to smooth network jitter
+                      oSchedule = Live,
+                      oWindow = Nothing,
+                      oHandshake = False,
+                      oBusPort = Nothing
+                      }
+    liveOSC = OSC "/dirt/play" $ Named {requiredArgs = []}
+:}
+ 
+:{
+let liveTargetDebug = Target {oName = "Max", -- Give your target a name
+                      oAddress = "127.0.0.1", -- the target network address
+                      oPort = 2021, -- the target network port
+                      oLatency = 0.1, -- the latency (to smooth network jitter
+                      oSchedule = Live,
+                      oWindow = Nothing,
+                      oHandshake = False,
+                      oBusPort = Nothing
+                      }
+    liveOSC = OSC "/dirt/play" $ Named {requiredArgs = []}
+:}
+ 
+
 
 
 -- :{
@@ -85,16 +126,26 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 
 -- :{
 -- let osc2whTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.2", oPort = 9000}
---     osc2whOSC = OSC "/osc2wh" $ Named {requiredArgs = []}
+--     osc2whOSC = OSC "/osc2wh" $ $ ArgList [("s", Nothing),
+--                                   ("vowel", Just $ VS "a"),
+--                                   ("pan", Just $ VF 0.5),
+--                                   ("volume", Just $ VF 1),
+--                                   ("cut", Just $ VI 1),
+--                                   ("intensity", Just $ VI 0)
+--                                 ]
 -- :}
 
 :{
-tidal <- startStream (defaultConfig {cFrameTimespan = 1/20 , cTempoPort = 9611}) 
+tidal <- startStream (defaultConfig) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
+--          , (oscdumpTarget,[oscdumpOSC])
+          ,(touchdesignerTarget,[touchdesignerOSC])
+          ,(liveTarget, [liveOSC])
+          ,(liveTargetDebug, [liveOSC])
+          -- , (ericTarget,[ericOSC])
           -- , (p5jsDirtTarget,[p5jsDirtOSC])
           -- , (faustTstTarget,[faustTstOSC])
-          , (oscdumpTarget,[oscdumpOSC])
           -- , (godotTarget,[godotOSC])
           -- , (visTarget,[visOSC])
           -- , (nannouTarget,[nannouOSC])
@@ -122,3 +173,10 @@ let setI = streamSetI tidal
 
 
 putStrLn "loaded Targets.hs"
+
+
+
+
+
+
+

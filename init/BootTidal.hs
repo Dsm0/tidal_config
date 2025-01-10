@@ -26,6 +26,10 @@ import Sound.Tidal.Context
 :script ~/.config/tidal/init/tidalScripts/CustomEffectParams.hs
 
 :script ~/.config/tidal/init/tidalScripts/Effects.hs
+:script ~/.config/tidal/init/tidalScripts/HackYourDaw.hs
+-- :script ~/.config/tidal/init/tidalScripts/HackYourDawEffects.hs
+-- :script ~/.config/tidal/init/tidalScripts/SuperDirtMixer.hs
+
 
 
 

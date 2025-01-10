@@ -11,7 +11,7 @@
 
 
 SynthDef(\beam, {
-	arg out, pan, freq = 467.1, voice = 0.385, semitone = 0.452, pitch1 = 2000, resonance = 0.1, sustain = 0.5, fb_amp = 4;
+	arg out, pan, freq = 467.1, voice = 0.385, semitone = 0.452, pitch1 = 1000, resonance = 0.1, sustain = 0.5, fb_amp = 4;
 	var beam_envelope, phasor, beam, feedback, transporter, reverb, activateEnv, percEnv, activate, buffer;
 
 	buffer = LocalBuf(SampleRate.ir * 0.12);

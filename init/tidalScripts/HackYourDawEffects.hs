@@ -20,11 +20,38 @@
     --  
 let p_bpe = parseBP_E
     bitein x y z = slow x . bite y z . fast x
-    
-    make_eff 'q' i = (|+ squiz (val/10)) where val = p_bpe i
-    make_eff 'Q' i = (|+ waveloss (p_bpe i)) where val = p_bpe i
-    make_eff 'w' i = echo (2) (((-1)*val - 1)/16) (15/18) where val = p_bpe i
-    make_eff 'W' i = inside 1 (echo (1 + val) (((-1))/16) (7/8)) where val = p_bpe i
+--  make_eff 'q' i = (|+ macro1 (val/100)) where val = p_bpe i
+--  make_eff 'Q' i = (|* macro1 (val/100)) where val = p_bpe i
+--  make_eff 'w' i = (|+ macro2 (val/100)) where val = p_bpe i
+--  make_eff 'W' i = (|* macro2 (val/100)) where val = p_bpe i
+--  make_eff 'e' i = (|+ macro3 (val/100)) where val = p_bpe i
+--  make_eff 'E' i = (|* macro3 (val/100)) where val = p_bpe i
+--  make_eff 'r' i = (|+ macro4 (val/100)) where val = p_bpe i
+--  make_eff 'R' i = (|* macro4 (val/100)) where val = p_bpe i
+--  make_eff 't' i = (|+ macro5 (val/100)) where val = p_bpe i
+--  make_eff 'T' i = (|* macro5 (val/100)) where val = p_bpe i
+--  make_eff 'y' i = (|+ macro6 (val/100)) where val = p_bpe i
+--  make_eff 'Y' i = (|* macro6 (val/100)) where val = p_bpe i
+--  make_eff 'u' i = (|+ macro7 (val/100)) where val = p_bpe i
+--  make_eff 'U' i = (|* macro7 (val/100)) where val = p_bpe i
+--  make_eff 'i' i = (|+ macro8 (val/100)) where val = p_bpe i
+--  make_eff 'I' i = (|* macro8 (val/100)) where val = p_bpe i
+--  make_eff 'o' i = (|+ macro9 (val/100)) where val = p_bpe i
+--  make_eff 'O' i = (|* macro9 (val/100)) where val = p_bpe i
+--  make_eff 'p' i = (|+ macro10 (val/100)) where val = p_bpe i
+--  make_eff 'P' i = (|* macro10 (val/100)) where val = p_bpe i
+--  make_eff 'a' i = (|+ macro11 (val/100)) where val = p_bpe i
+--  make_eff 'A' i = (|* macro11 (val/100)) where val = p_bpe i
+--  make_eff 's' i = (|+ macro12 (val/100)) where val = p_bpe i
+--  make_eff 'S' i = (|* macro12 (val/100)) where val = p_bpe i
+--  make_eff 'd' i = (|+ macro13 (val/100)) where val = p_bpe i
+--  make_eff 'D' i = (|* macro13 (val/100)) where val = p_bpe i
+--  make_eff 'f' i = (|+ macro14 (val/100)) where val = p_bpe i
+--  make_eff 'F' i = (|* macro14 (val/100)) where val = p_bpe i
+--  make_eff 'g' i = (|+ macro15 (val/100)) where val = p_bpe i
+--  make_eff 'G' i = (|* macro15 (val/100)) where val = p_bpe i
+--  make_eff 'h' i = (|+ macro15 (val/100)) where val = p_bpe i
+--  make_eff 'h' i = (|* macro15 (val/100)) where val = p_bpe i
     make_eff 'e' i =  (# delay (0.5 + ((50 + val)/100))) 
                         . (|* delaytime (((40 + val)/1000))) 
                         . (# delayfb ((9/16) + (val/2000))) where val = p_bpe i
@@ -62,8 +89,8 @@ let p_bpe = parseBP_E
     make_eff 'D' i = (|+ distort (1*val)) where val = p_bpe i
     make_eff 'f' i = fast (1 + val) where val = p_bpe i
     make_eff 'F' i = fast (1 + (val / 64)) where val = p_bpe i
-    make_eff 'g' i = (|* speed (1 + (val/24))) where val = p_bpe i
-    make_eff 'G' i = (|* speed (1 + (val/100))) where val = p_bpe i
+    make_eff 'g' i = (|* pitch (1 + (val))) where val = p_bpe i
+    make_eff 'G' i = (|* pitch (1 + (val/100))) where val = p_bpe i
     make_eff 'h' i = hurry (1 + (val)) where val = p_bpe i
     make_eff 'H' i = hurry ((3 + val)/8) where val = p_bpe i
     make_eff 'j' i = degradeBy (val / 10) where val = p_bpe i
