@@ -70,8 +70,6 @@ SuperDirt
 "/home/wil/.config/tidal/init/pulu_clock_no_tick.scd".load;
 
 
-Buffer
-
 s.volume = 0
 s.volume = 0
 

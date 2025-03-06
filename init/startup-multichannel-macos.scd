@@ -16,7 +16,6 @@ s.options.numInputBusChannels = 18; // set this to your hardware output channel 
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // twelve output channels, increase if you want to pan across more channels
 
-
     // You can adjust these parameter even in runtime
 
 	/*
@@ -60,6 +59,9 @@ s.waitForBoot {
 	"/Users/will/.config/tidal/init/effects/multiband_comp.scd".load;
 
 
+	"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+	"SuperDirt OSC file reloading system initialized.".postln;
+
 	// ~looper = TidalLooper(~dirt);
 
     // You can adjust these parameter even in runtime
@@ -87,11 +89,11 @@ s.waitForBoot {
 //	~dirt.soundLibrary.addSynth(\sy8);
 //	~dirt.soundLibrary.addSynth(\sy9);
 	s.volume = (0);
-	s.volume = -5;
+	s.volume = -10;
 //	~dirt.loadSoundFiles("/run/media/will/5EB068D0139EDA18/rap/*");
 //	~dirt.loadSoundFiles("/run/media/will/5EB068D0139EDA18/songSamp/*");
 //	~dirt.loadSoundFiles("/run/media/will/5EB068D0139EDA18/customSamples/*");
-//	~dirt.loadSoundFiles("/M/Documents/unsorted_wavs");
+	//	~dirt.loadSoundFiles("/M/Documents/unsorted_wavsÓ");
 
 	SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 	SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
@@ -122,6 +124,68 @@ MIDIClient.init;
 
 
 Server.default.recChannels = 16
+
+
+
+
+
+
+
+s.volume = 0
+
+
+
+
+
+// alex
+// alex says:ah ok, didn't know that
+// 11:54
+// alex says:for non-global/orbit effects by default the effects chain goes
+// vowel, shape, hpf, bpf, crush, coarse, lpf, pshift, envelope, grenvelo, tremolo, phaser, waveloss, squiz, fshift, triode, krush, octer, ring, distort, spectral-delay, spectral-freeze, spectral-comb, spectral-smear, spectral-scram, spectral-binshift, spectral-hbrick, spectral-lbrick, spectral-conformer, spectral-enhance, dj-filter
+
+
+// global effects are defined in DirtOrbit.sc (in initDefaultGlobalEffects)
+
+
+
+
+(
+(
+SynthDef(\synth1,  {
+	arg out, pan, freq = 405, voice = 0.385, speed = 1.0, semitone = 0.452, pitch1 = 2000, resonance = 0.1, sustain = 0.5;
+//	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
+},
+metadata: (
+  credit: "Nathan Ho (c_ edit)",
+  category: \soundfx,
+  tags: [\beeping, \misc]
+)).add;
+).play;
+)
+
+
+
+
+
+
+// NOTE: you can redefine effects order with ~dirt.orderModules()
+https://club.tidalcycles.org/t/effects-after-reverb/1315/15?u=yaxu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .
 

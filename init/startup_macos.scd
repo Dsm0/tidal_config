@@ -8,15 +8,19 @@ s.options.numInputBusChannels = 8; // set this to your hardware output channel s
 // boot the server and start SuperDirt
 s.options.sampleRate = 44100;
 s.waitForBoot {
+	~dirtPort = 57120;
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     //
     SynthDef(\foo1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     SynthDef(\foo2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
     ~dirt.soundLibrary.addSynth(\foo1);
     ~dirt.soundLibrary.addSynth(\foo2);
-	~dirt.start(57120, 0 ! 14);   // start listening on port 57120, create two busses each sending audio to channel 0
+	~dirt.start(~dirtPort, 0 ! 14);   // start listening on port 57120, create two busses each sending audio to channel 0
 	// optional, needed for convenient access from sclang:
-	~dirt.fileExtensions = ["wav","ogg","mp3","aiff","opus"];
+	~dirt.fileExtensions = ["wav","ogg","mp3","aiff","opus","aif"];
+
+	// Load the OSC controls for sample loading
+	"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
 
 	/*
 	~looper = TidalLooper(~dirt);
@@ -39,7 +43,7 @@ s.waitForBoot {
 
 
 	"ahhhh".postln;
-	s.volume = (0);
+	s.volume = (-11);
 	// thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
 
 	thisProcess.platform.recordingsDir = "~/Music/sc_recs".standardizePath;
@@ -47,12 +51,16 @@ s.waitForBoot {
 	// thisProcess.platform.recordingsDir = "~/Music/sc_recs/".standardizePath;
 
 
-	// TODO: just get the env variable
+
+	"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+	"SuperDirt OSC file reloading system initialized.".postln;
+
 	"/Users/will/.config/tidal/init/effects/sidechain.scd".load;
 
 	// "/home/wil/.config/tidal/init/effects/AnalogTape.scd".load;
 
 	"/Users/will/.config/tidal/init/effects/multiband_comp.scd".load;
+
 
 	~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
 // for example: ~d kljirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
@@ -66,12 +74,12 @@ s.waitForBoot {
 )
 
 
+s.volume = -2
+
 
 ServerOptions.devices
 
 s.o.devices
-
-
 
 
 (
@@ -140,9 +148,7 @@ Quarks.gui
 ~dirt.un
 
 (
-
 "/home/will/.config/tidal/init/pulu_clock.scd".load;
-
 )
 
 

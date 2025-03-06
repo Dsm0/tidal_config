@@ -1,7 +1,6 @@
 import Sound.Tidal.Context
 -- import Control.Concurrent (threadDelay)
--- import Control.Concurrent.MVar (readMVar)
-import qualified Control.Monad as CM
+-- import Control.Concurrent.MVar (readMVar) import qualified Control.Monad as CM
 import qualified Sound.Tidal.Stream
 -- import qualified Sound.Tidal.Tempo as T
 
@@ -37,7 +36,6 @@ let visTarget :: Target
     visTarget = Target { oName = "Pattern handler", oAddress = "127.0.0.1", oPort = 5050, oBusPort = Nothing, oLatency = 0.02, oWindow = Nothing, oSchedule = Pre BundleStamp, oHandshake = False }
     visOSC = OSC "/vis" $ Named {requiredArgs = []}
 
-
 :}
  
 
@@ -55,9 +53,17 @@ let oscdumpTarget :: Target
 :}
  
 
+ 
+
 :{
 let touchdesignerTarget :: Target
     touchdesignerTarget = superdirtTarget {oName = "touchdesigner", oPort = 5224, oSchedule = Live, oHandshake = False}
+    touchdesignerOSC = OSC "/touchdesigner" $ Named {requiredArgs = []}
+:}
+ 
+:{
+let touchdesignerRemoteTarget :: Target
+    touchdesignerRemoteTarget = superdirtTarget {oName = "touchdesigner", oAddress = "10.2.105.183", oPort = 5225, oHandshake = False}
     touchdesignerOSC = OSC "/touchdesigner" $ Named {requiredArgs = []}
 :}
  
@@ -66,6 +72,12 @@ let touchdesignerTarget :: Target
 let ericTarget :: Target
     ericTarget = superdirtTarget {oAddress = "192.168.1.2", oPort = 5432, oHandshake = False}
     ericOSC = OSC "/freq" $ Named {requiredArgs = []}
+:}
+ 
+
+:{
+let maxTarget = superdirtTarget {oName = "max", oPort = 5225, oSchedule = Live, oHandshake = False}
+    maxOSC = OSC "/max" $ Named {requiredArgs = []} 
 :}
 
 
@@ -139,10 +151,12 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 tidal <- startStream (defaultConfig) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
---          , (oscdumpTarget,[oscdumpOSC])
+          , (oscdumpTarget,[oscdumpOSC])
           ,(touchdesignerTarget,[touchdesignerOSC])
+ --         ,(touchdesignerRemoteTarget,[touchdesignerOSC])
           ,(liveTarget, [liveOSC])
           ,(liveTargetDebug, [liveOSC])
+          ,(maxTarget, [maxOSC])
           -- , (ericTarget,[ericOSC])
           -- , (p5jsDirtTarget,[p5jsDirtOSC])
           -- , (faustTstTarget,[faustTstOSC])
@@ -173,8 +187,6 @@ let setI = streamSetI tidal
 
 
 putStrLn "loaded Targets.hs"
-
-
 
 
 

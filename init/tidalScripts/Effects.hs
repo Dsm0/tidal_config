@@ -77,7 +77,7 @@ let p_bpe = parseBP_E
     make_eff 'x' i = (|+ lpf (100*val)) where val = p_bpe i
     make_eff 'X' i = (# pan ((val)/20)) where val = p_bpe i
     make_eff 'c' i = if (read i :: Integer) < 0 then chop (-1 * (val -1)) else chop (1 + val) where val = p_bpe i
-    make_eff 'C' i = (# cut val) where val = p_bpe i
+    make_eff 'C' i = ((# cut val). (# orbit val)) where val = p_bpe i
     make_eff 'v' i = ghost
     make_eff 'V' i = (# room ("0"/100)) . (# size ("0"/100)) . (# delay (0)) . (# delayfb (0))  . (# delaytime (1) )
     make_eff 'b' i = shiftBy (val/8) where val = p_bpe i
