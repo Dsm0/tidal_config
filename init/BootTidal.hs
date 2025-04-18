@@ -27,6 +27,8 @@ import Sound.Tidal.Context
 
 :script ~/.config/tidal/init/tidalScripts/Effects.hs
 :script ~/.config/tidal/init/tidalScripts/HackYourDaw.hs
+
+:script ~/.config/tidal/init/tidalScripts/Mi-Ugens.hs
  
 -- :script ~/.config/tidal/init/tidalScripts/Synth1Presets.hs
  

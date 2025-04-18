@@ -26,6 +26,16 @@ let -- midside
     tape_mode = pI "tape_mode"
     soundin = pI "soundin" -- change input bus
     multiband_comp = pF "multiband_comp"
+    gate = pF "gate" 
+    gateAtk = pF "gateatk"
+    gateRel = pF "gateRel"
+    chorusrate = pF "chorusrate"
+    chorusdepth = pF "chorusdepth"
+    chorusdelay = pF "chorusdelay"
+    chorusmix = pF "chorusmix"
+    foaPush = pF "foaRotate"
+    foaAzim = pF "foaTilt"
+    foaAngle = pF "foaTumble"
 :}
 
 

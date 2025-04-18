@@ -24,8 +24,9 @@ SynthDef(\fmx7, {
 	var out = \out.kr(0);
 	var pan = \pan.kr(0);
 	var gate = \gate.kr(1);
-	var freq = \freq.kr(440);
 	var dur = \dur.kr(1);
+    var line = Line.ar(\begin.kr(0), \end.kr(1), dur, doneAction: Done.freeSelf);
+	var freq = \freq.kr(440) * \speed.kr(1) * (1 + (\accelerate.kr(0) * line));
     var legato = \legato.kr(1);
     var attack = \atk.kr(0.01);
     var decay = \dec.kr(0.3);
@@ -87,20 +88,20 @@ SynthDef(\fmx7, {
 }).store;
 )
 
-// (
+(
 // fmx7 basic example
-// Pbindef(\a, \instrument, \fmx7,
-//     \dur, 4,
-//     \amp2, 1,
-//     \ratio2, 1.1,
-//     \mod13, 1,
-//     \egrate31, 10.1,
-//     \eglevel32, 0.1,
-// ).play;
-// )
+Pbindef(\a, \instrument, \fmx7,
+    \dur, 4,
+    \amp2, 1,
+    \ratio2, 1.1,
+    \mod13, 1,
+    \egrate31, 10.1,
+    \eglevel32, 0.1,
+).play;
+)
 
 // (
-// fmx7 Pbindef random example
+// // fmx7 Pbindef random example
 // Pbindef(\a, \instrument, \fmx7).play;
 // Pbindef(\a, \amp, 1);
 // 6.do { |i|
@@ -119,3 +120,12 @@ SynthDef(\fmx7, {
 // Pbindef(\a, \releaseTime, 1.0.rand);
 // };
 // )
+
+
+
+
+
+
+
+
+// SuperDirt.postTidalParameters([\fmx7])

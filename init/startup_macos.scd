@@ -7,6 +7,7 @@ s.options.numOutputBusChannels = 2; // set this to your hardware output channel 
 s.options.numInputBusChannels = 8; // set this to your hardware output channel size, if necessary
 // boot the server and start SuperDirt
 s.options.sampleRate = 44100;
+s.options.maxLogins = 2;
 s.waitForBoot {
 	~dirtPort = 57120;
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
@@ -21,6 +22,7 @@ s.waitForBoot {
 
 	// Load the OSC controls for sample loading
 	"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+	"/Users/will/.config/tidal/init/effects/gate.scd".load;
 
 	/*
 	~looper = TidalLooper(~dirt);
@@ -42,6 +44,15 @@ s.waitForBoot {
 	);
 
 
+
+	"/Users/will/.config/tidal/init/synths/mi-ugens.scd".load;
+	"loaded mi-ugens.scd".postln;
+	// https://tidalcycles.org/docs/reference/mi-ugens-plaits/
+
+	"/Users/will/.config/tidal/init/synths/gutter_synth.scd".load;
+
+
+
 	"ahhhh".postln;
 	s.volume = (-11);
 	// thisProcess.platform.recordingsDir = "~/0_SD/Music/new_audacity/sc_recs/".standardizePath;
@@ -53,6 +64,8 @@ s.waitForBoot {
 
 
 	"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+
+
 	"SuperDirt OSC file reloading system initialized.".postln;
 
 	"/Users/will/.config/tidal/init/effects/sidechain.scd".load;
@@ -68,9 +81,96 @@ s.waitForBoot {
 
 	// "/home/wil/.config/tidal/init/pulu_clock.scd".load;
 
+
+	MIDIClient.init;
+	~midiOut = MIDIOut.newByName("IAC Driver", "Tidal1");
+	~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
+
+
+
+	~dirt.orbits.do { |x|
+            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+		    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+            x.globalEffects = x.globalEffects
+              .addFirst(clouds)
+              .addFirst(verb)
+		       .addFirst(warps);
+            x.initNodeTree;
+	};
 };
 
 //
+)
+
+s.reboot;
+
+(
+
+
+	~dirt.orbits.do { |x|
+            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+		    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+            x.globalEffects = x.globalEffects
+              .addFirst(clouds)
+              .addFirst(verb)
+		       .addFirst(warps);
+            x.initNodeTree;
+	};
+)
+
+
+
+
+
+
+
+
+(
+~dirt.orbits.do { |x|
+            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+		    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+            x.globalEffects = x.globalEffects
+              .addFirst(clouds)
+              .addFirst(verb)
+		       .addFirst(warps);
+            x.initNodeTree;
+	};
+)
+
+
+
+(
+	~dirt.orbits.do { |x|
+            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+	        var warps = GlobalDirtEffect(\global_mi_warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+            x.globalEffects = x.globalEffects
+              .addFirst(clouds)
+              .addFirst(verb)
+	          .addFirst(warps;
+            x.initNodeTree;
+	};
+}
+)
+
+
+
+
+
+
+
+
+(
+
+)
+
+
+
+(
+
 )
 
 
@@ -225,3 +325,8 @@ s.loadSynthDefs("/home/will/.config/tidal/init/effects/")
 ~dirt.maxLatency = 64
 "ah".postln;
 s.options.memoryLocking = true
+
+
+
+
+
