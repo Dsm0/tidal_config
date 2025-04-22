@@ -122,6 +122,7 @@ s.waitForBoot {
 
     Server.default.recChannels = 18;
 	thisProcess.platform.recordingsDir = "~/Music/sc_recs/multitrack".standardizePath;
+	"/Users/will/.config/tidal/init/synths/dx7_test.scd".load;
 
 
 	// ~dirt.orbits.do { |x|
@@ -134,9 +135,52 @@ s.waitForBoot {
 	// 	       .addFirst(warps);
     //         x.initNodeTree;
 	// };
+	fork {
+			~dirt.orbits.do { |x|
+			            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+			            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+					    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+			            x.globalEffects = x.globalEffects
+			              .addFirst(clouds)
+			              .addFirst(verb)
+					       .addFirst(warps);
+			            x.initNodeTree;
+				};
+	};
+
+
+
+
+
+
 };
 
+
 )
+
+
+
+
+
+
+
+
+(
+	
+			~dirt.orbits.do { |x|
+			            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+			            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+					    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+			            x.globalEffects = x.globalEffects
+			              .addFirst(clouds)
+			              .addFirst(verb)
+					       .addFirst(warps);
+			            x.initNodeTree;
+				};
+)
+
+
+
 
 (
 // reset fucked delay lines
@@ -149,18 +193,7 @@ s.waitForBoot {
 
 // "/home/ick/.config/tidal/init/pulu_clock.scd".load;
 
-(
-~dirt.orbits.do { |x|
-            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
-            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
-		    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
-            x.globalEffects = x.globalEffects
-              .addFirst(clouds)
-              .addFirst(verb)
-		       .addFirst(warps);
-            x.initNodeTree;
-	};
-)
+
 
 
 

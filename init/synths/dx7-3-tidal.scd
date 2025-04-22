@@ -579,7 +579,7 @@ Out.ar(~dx7_busMeAmp, lfoAmp)
 defPitchEnv = { arg rate_1, rate_2, rate_3, rate_4, level_1, level_2, level_3, level_4;
 	var endy,
 	envPL0, envPL1, envPL2, envPL3, envPL4, envPR0, envPR1, envPR2,envPR3;
-	"--------------\nDEFPITCHENV \n--------------".postln;
+	// "--------------\nDEFPITCHENV \n--------------".postln;
 
 	//functions start here
 	envPL0 = dx7_voice_pitch_level_to_shift[level_4];
@@ -976,7 +976,7 @@ defme2 = { arg note, vel, preset, flag;
 	envR  = Array2D.new(6,4),
 	//selector = [66, 48, 54, 60, 66],
 	envC  = Array2D.new(6,4);
-	"--------------\nDEFME2 \n--------------".postln;
+	// "--------------\nDEFME2 \n--------------".postln;
 
 	if(vel > 0,{
 		var g = dx7patches[preset%16384];

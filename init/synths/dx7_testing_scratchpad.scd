@@ -436,7 +436,6 @@ Help.gui
 ~busMePitch = Bus.audio(s, 1); // " "
 
 
-"/Users/will/.config/tidal/init/synths/dx7_test.scd".load;
 
 ~dx7_presets_values.plot;
 
@@ -444,6 +443,10 @@ Help.gui
 
 
 
+
+SuperDirt.postTidalParameters([\DX7_tst]);
+
+Synth("DX7_tst");
 
 
 
@@ -619,12 +622,21 @@ Synth(\control_setter, [
 
 ~dx7_presets_values.size
 
-~dx7_preset_buffer = Buffer.alloc(s, 3 * ~dx7_presets_values[0].size); // 4 presets with 4 parameters each
-~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
+
+~dx7_presetCount = 10;
+~dx7_preset_buffer = Buffer.alloc(s, ~dx7_presetCount * ~dx7_presets_values[0].size + 200); // 4 presets with 4 parameters each
+
+~dx7_preset_buffer
+~dx7_preset_buffer.loadCollection(~dx7_presets_values.flat);
+
+~dx7_preset_buffer.plot;
+~dx7_presets_values.flat.plot;
+
+Help.gui
 
 (
 "/Users/will/.config/tidal/init/synths/dx7_test.scd".load;
-~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
+// ~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
 )
 
 s.dumpOSC(0)
