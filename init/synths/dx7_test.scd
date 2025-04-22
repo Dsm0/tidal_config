@@ -435,65 +435,66 @@ Out.ar(~dx7_busMeAmp, lfoAmp)
 /* -- DX7 Synth -- use 'addToTail' when instantiating this synth */ 
 SynthDef( 'DX7_tst' ,{
 
-arg outBus=0, pitch= 97.998858995437 , gate = 1, envPL0= 0.0 , envPL1= 0.0 , envPL2= 0.0 ,envPL3= 0.0 ,
-envPL4= 0.0 , envPR0= 0.0 ,envPR1= 0.0 ,
-envPR2= 0.0 ,envPR3= 0.0 ,coars1= 0.5 ,
-fine_1= 1.3 ,coars2= 1 ,fine_2= 1.0 ,
-coars3= 0.5 ,fine_3= 1.99 ,coars4= 0.5 ,
-fine_4= 1.99 ,coars5= 1 ,fine_5= 1.0 ,
-coars6= 8 ,fine_6= 1.0 ,env1L0= 74.90380068726 ,
-env1L1= 0.6538005016345 ,env1L2= 2.1538005053845 ,env1L3= 2.1538005053845 ,
-env1L4= 74.90380068726 ,env1R0= 0.024221249 ,env1R1= 0.15341901234257 ,
-env1R2= 0.0 ,env1R3= 1.8511723207791 ,env1C0= 3 ,
-env1C1= -3 ,env1C2= -3 ,env1C3= -3 ,
-env2L0= 87.0000002175 ,env2L1= 18.000000045 ,env2L2= 18.000000045 ,
-env2L3= 18.000000045 ,env2L4= 87.0000002175 ,env2R0= 0.00035859185 ,
-env2R1= 0.0 ,env2R2= 0.0 ,env2R3= 7.0695183846855 ,
-env2C0= 3 ,env2C1= -3 ,env2C2= -3 ,
-env2C3= -3 ,env3L0= 74.90380068726 ,env3L1= 0.6538005016345 ,
-env3L2= 2.1538005053845 ,env3L3= 2.1538005053845 ,env3L4= 74.90380068726 ,
-env3R0= 0.024221249 ,env3R1= 0.17141308922609 ,env3R2= 0.0 ,
-env3R3= 1.8511723207791 ,env3C0= 3 ,env3C1= -3 ,
-env3C2= -3 ,env3C3= -3 ,env4L0= 75.43586718859 ,
-env4L1= 9.4358670235897 ,env4L2= 9.4358670235897 ,env4L3= 9.4358670235897 ,
-env4L4= 75.43586718859 ,env4R0= 0.00050529185 ,env4R1= 0.0 ,
-env4R2= 0.0 ,env4R3= 2.996897285981 ,env4C0= 3 ,
-env4C1= -3 ,env4C2= -3 ,env4C3= -3 ,
-env5L0= 92.46793373117 ,env5L1= 18.217933545545 ,env5L2= 18.217933545545 ,
-env5L3= 18.217933545545 ,env5L4= 92.46793373117 ,env5R0= 0.00033414185 ,
-env5R1= 0.0 ,env5R2= 0.0 ,env5R3= 3.5885856943932 ,
-env5C0= 3 ,env5C1= -3 ,env5C2= -3 ,
-env5C3= -3 ,env6L0= 99.025534747564 ,env6L1= 24.775534561939 ,
-env6L2= 32.275534580689 ,env6L3= 32.275534580689 ,env6L4= 99.025534747564 ,
-env6R0= 0.00614021685 ,env6R1= 0.017670384940926 ,env6R2= 0.0 ,
-env6R3= 2.927061792015 ,env6C0= 3 ,env6C1= -3 ,
-env6C2= -3 ,env6C3= -3 ,noteBlok1= 0 ,
-noteBlok2= 1 ,noteBlok3= 1 ,
-noteBlok4= 1 ,noteBlok5= 1 ,
-noteBlok6= 1 ,
-dn0= 0 ,dn1= 12.566370614359 ,dn2= 0 ,dn3= 0 ,
-dn4= 0 ,dn5= 0 ,dn6= 0 ,dn7= 5.5417694409324 ,
-dn8= 0 ,dn9= 0 ,dn10= 0 ,dn11= 0 ,
-dn12= 0 ,dn13= 0 ,dn14= 0 ,dn15= 12.566370614359 ,
-dn16= 0 ,dn17= 0 ,dn18= 0 ,dn19= 0 ,
-dn20= 0 ,dn21= 0 ,dn22= 12.566370614359 ,dn23= 12.566370614359 ,
-dn24= 0 ,dn25= 0 ,dn26= 0 ,dn27= 0 ,
-dn28= 0 ,dn29= 0 ,dn30= 0 ,dn31= 0 ,
-dn32= 0 ,dn33= 0 ,dn34= 0 ,dn35= 0 ,
-dn36= 1 ,dn37= 0 ,dn38= 1 ,dn39= 0 ,
-dn40= 0 ,dn41= 0 ,detun1= 39 ,
-detun2= 5 ,detun3= 1 ,detun4= 14 ,
-detun5= 14 ,detun6= 14 ,modSens1= 0 ,
-modSens2= 0 ,modSens3= 0 ,modSens4= 0 ,
-modSens5= 0 ,modSens6= 0 ,outMult= -1 ,
-osc_sync= 0 ,transpose= nil ,gate1=1,gate1Rel = 1,
-dx7_amp=0.1,totVol= nil, presetIndex= 0;
+// arg outBus=0, pitch= 97.998858995437 , gate = 1, envPL0= 0.0 , envPL1= 0.0 , envPL2= 0.0 ,envPL3= 0.0 ,
+// envPL4= 0.0 , envPR0= 0.0 ,envPR1= 0.0 ,
+// envPR2= 0.0 ,envPR3= 0.0 ,coars1= 0.5 ,
+// fine_1= 1.3 ,coars2= 1 ,fine_2= 1.0 ,
+// coars3= 0.5 ,fine_3= 1.99 ,coars4= 0.5 ,
+// fine_4= 1.99 ,coars5= 1 ,fine_5= 1.0 ,
+// coars6= 8 ,fine_6= 1.0 ,env1L0= 74.90380068726 ,
+// env1L1= 0.6538005016345 ,env1L2= 2.1538005053845 ,env1L3= 2.1538005053845 ,
+// env1L4= 74.90380068726 ,env1R0= 0.024221249 ,env1R1= 0.15341901234257 ,
+// env1R2= 0.0 ,env1R3= 1.8511723207791 ,env1C0= 3 ,
+// env1C1= -3 ,env1C2= -3 ,env1C3= -3 ,
+// env2L0= 87.0000002175 ,env2L1= 18.000000045 ,env2L2= 18.000000045 ,
+// env2L3= 18.000000045 ,env2L4= 87.0000002175 ,env2R0= 0.00035859185 ,
+// env2R1= 0.0 ,env2R2= 0.0 ,env2R3= 7.0695183846855 ,
+// env2C0= 3 ,env2C1= -3 ,env2C2= -3 ,
+// env2C3= -3 ,env3L0= 74.90380068726 ,env3L1= 0.6538005016345 ,
+// env3L2= 2.1538005053845 ,env3L3= 2.1538005053845 ,env3L4= 74.90380068726 ,
+// env3R0= 0.024221249 ,env3R1= 0.17141308922609 ,env3R2= 0.0 ,
+// env3R3= 1.8511723207791 ,env3C0= 3 ,env3C1= -3 ,
+// env3C2= -3 ,env3C3= -3 ,env4L0= 75.43586718859 ,
+// env4L1= 9.4358670235897 ,env4L2= 9.4358670235897 ,env4L3= 9.4358670235897 ,
+// env4L4= 75.43586718859 ,env4R0= 0.00050529185 ,env4R1= 0.0 ,
+// env4R2= 0.0 ,env4R3= 2.996897285981 ,env4C0= 3 ,
+// env4C1= -3 ,env4C2= -3 ,env4C3= -3 ,
+// env5L0= 92.46793373117 ,env5L1= 18.217933545545 ,env5L2= 18.217933545545 ,
+// env5L3= 18.217933545545 ,env5L4= 92.46793373117 ,env5R0= 0.00033414185 ,
+// env5R1= 0.0 ,env5R2= 0.0 ,env5R3= 3.5885856943932 ,
+// env5C0= 3 ,env5C1= -3 ,env5C2= -3 ,
+// env5C3= -3 ,env6L0= 99.025534747564 ,env6L1= 24.775534561939 ,
+// env6L2= 32.275534580689 ,env6L3= 32.275534580689 ,env6L4= 99.025534747564 ,
+// env6R0= 0.00614021685 ,env6R1= 0.017670384940926 ,env6R2= 0.0 ,
+// env6R3= 2.927061792015 ,env6C0= 3 ,env6C1= -3 ,
+// env6C2= -3 ,env6C3= -3 ,noteBlok1= 0 ,
+// noteBlok2= 1 ,noteBlok3= 1 ,
+// noteBlok4= 1 ,noteBlok5= 1 ,
+// noteBlok6= 1 ,
+// dn0= 0 ,dn1= 12.566370614359 ,dn2= 0 ,dn3= 0 ,
+// dn4= 0 ,dn5= 0 ,dn6= 0 ,dn7= 5.5417694409324 ,
+// dn8= 0 ,dn9= 0 ,dn10= 0 ,dn11= 0 ,
+// dn12= 0 ,dn13= 0 ,dn14= 0 ,dn15= 12.566370614359 ,
+// dn16= 0 ,dn17= 0 ,dn18= 0 ,dn19= 0 ,
+// dn20= 0 ,dn21= 0 ,dn22= 12.566370614359 ,dn23= 12.566370614359 ,
+// dn24= 0 ,dn25= 0 ,dn26= 0 ,dn27= 0 ,
+// dn28= 0 ,dn29= 0 ,dn30= 0 ,dn31= 0 ,
+// dn32= 0 ,dn33= 0 ,dn34= 0 ,dn35= 0 ,
+// dn36= 1 ,dn37= 0 ,dn38= 1 ,dn39= 0 ,
+// dn40= 0 ,dn41= 0 ,detun1= 39 ,
+// detun2= 5 ,detun3= 1 ,detun4= 14 ,
+// detun5= 14 ,detun6= 14 ,modSens1= 0 ,
+// modSens2= 0 ,modSens3= 0 ,modSens4= 0 ,
+// modSens5= 0 ,modSens6= 0 ,outMult= 1 ,
+// osc_sync= 0 ,transpose= nil ,gate1=1,gate1Rel = 1,
+// dx7_amp=0.1,totVol= nil, presetIndex= 0;
 
 // PARAMS SENT BY TIDAL
 // [ "/s_new", "dirt_gate2", -1, 1, 15681, "in", 132, "out", 134, "amp", 0.4, "gain", 2, "overgain", 0, "sample", 394116296, "cut", 0, "sustain", 27.4275, "fadeInTime", 0, "fadeTime", 0.001 ]
 
-// arg outBus=(0), pitch= (-1) , gate = (-1), envPL0= (-1) , envPL1= (-1) , envPL2= (-1) ,envPL3= (-1) , envPL4= (-1) , envPR0= (-1) ,envPR1= (-1), envPR2= (-1) ,envPR3= (-1) ,coars1= (-1) , fine_1=(-1),coars2=(-1),fine_2=(-1), coars3=(-1),fine_3=(-1),coars4=(-1), fine_4=(-1),coars5=(-1),fine_5=(-1), coars6=(-1),fine_6=(-1),env1L0=(-1), env1L1=(-1),env1L2=(-1),env1L3=(-1), env1L4=(-1),env1R0=(-1),env1R1=(-1), env1R2=(-1),env1R3=(-1),env1C0=(-1), env1C1=(-1),env1C2=(-1),env1C3=(-1), env2L0=(-1),env2L1=(-1),env2L2=(-1), env2L3=(-1),env2L4=(-1),env2R0=(-1), env2R1=(-1),env2R2=(-1),env2R3=(-1), env2C0=(-1),env2C1=(-1),env2C2=(-1), env2C3=(-1),env3L0=(-1),env3L1=(-1), env3L2=(-1),env3L3=(-1),env3L4=(-1), env3R0=(-1),env3R1=(-1),env3R2=(-1), env3R3=(-1),env3C0=(-1),env3C1=(-1), env3C2=(-1),env3C3=(-1),env4L0=(-1), env4L1=(-1),env4L2=(-1),env4L3=(-1), env4L4=(-1),env4R0=(-1),env4R1=(-1), env4R2=(-1),env4R3=(-1),env4C0=(-1), env4C1=(-1),env4C2=(-1),env4C3=(-1), env5L0=(-1),env5L1=(-1),env5L2=(-1), env5L3=(-1),env5L4=(-1),env5R0=(-1), env5R1=(-1),env5R2=(-1),env5R3=(-1), env5C0=(-1),env5C1=(-1),env5C2=(-1), env5C3=(-1),env6L0=(-1),env6L1=(-1), env6L2=(-1),env6L3=(-1),env6L4=(-1), env6R0=(-1),env6R1=(-1),env6R2=(-1), env6R3=(-1),env6C0=(-1),env6C1=(-1), env6C2=(-1),env6C3=(-1),noteBlok1=(-1), noteBlok2=(-1),noteBlok3=(-1), noteBlok4=(-1),noteBlok5=(-1), noteBlok6=(-1), dn0=(-1),dn1=(-1),dn2=(-1),dn3=(-1), dn4=(-1),dn5=(-1),dn6=(-1),dn7=(-1), dn8=(-1),dn9=(-1),dn10=(-1),dn11=(-1), dn12=(-1),dn13=(-1),dn14=(-1),dn15=(-1), dn16=(-1),dn17=(-1),dn18=(-1),dn19=(-1), dn20=(-1),dn21=(-1),dn22=(-1),dn23=(-1), dn24=(-1),dn25=(-1),dn26=(-1),dn27=(-1), dn28=(-1),dn29=(-1),dn30=(-1),dn31=(-1), dn32=(-1),dn33=(-1),dn34=(-1),dn35=(-1), dn36=(-1),dn37=(-1),dn38=(-1),dn39=(-1), dn40=(-1),dn41=(-1),detun1=(-1), detun2=(-1),detun3=(-1),detun4=(-1), detun5=(-1),detun6=(-1),modSens1=(-1), modSens2=(-1),modSens3=(-1),modSens4=(-1), modSens5=(-1),modSens6=(-1),outMult=(-1), osc_sync=(-1),transpose=(-1),gate1=(-1),gate1Rel =(-1), amp=(-1),totVol=(-1), 
-// presetIndex= 0;
+arg outBus=(0), pitch= (-1) , envPL0= (-1) , envPL1= (-1) , envPL2= (-1) ,envPL3= (-1) , envPL4= (-1) , envPR0= (-1) ,envPR1= (-1), envPR2= (-1) ,envPR3= (-1) ,coars1= (-1) , fine_1=(-1),coars2=(-1),fine_2=(-1), coars3=(-1),fine_3=(-1),coars4=(-1), fine_4=(-1),coars5=(-1),fine_5=(-1), coars6=(-1),fine_6=(-1),env1L0=(-1), env1L1=(-1),env1L2=(-1),env1L3=(-1), env1L4=(-1),env1R0=(-1),env1R1=(-1), env1R2=(-1),env1R3=(-1),env1C0=(-1), env1C1=(-1),env1C2=(-1),env1C3=(-1), env2L0=(-1),env2L1=(-1),env2L2=(-1), env2L3=(-1),env2L4=(-1),env2R0=(-1), env2R1=(-1),env2R2=(-1),env2R3=(-1), env2C0=(-1),env2C1=(-1),env2C2=(-1), env2C3=(-1),env3L0=(-1),env3L1=(-1), env3L2=(-1),env3L3=(-1),env3L4=(-1), env3R0=(-1),env3R1=(-1),env3R2=(-1), env3R3=(-1),env3C0=(-1),env3C1=(-1), env3C2=(-1),env3C3=(-1),env4L0=(-1), env4L1=(-1),env4L2=(-1),env4L3=(-1), env4L4=(-1),env4R0=(-1),env4R1=(-1), env4R2=(-1),env4R3=(-1),env4C0=(-1), env4C1=(-1),env4C2=(-1),env4C3=(-1), env5L0=(-1),env5L1=(-1),env5L2=(-1), env5L3=(-1),env5L4=(-1),env5R0=(-1), env5R1=(-1),env5R2=(-1),env5R3=(-1), env5C0=(-1),env5C1=(-1),env5C2=(-1), env5C3=(-1),env6L0=(-1),env6L1=(-1), env6L2=(-1),env6L3=(-1),env6L4=(-1), env6R0=(-1),env6R1=(-1),env6R2=(-1), env6R3=(-1),env6C0=(-1),env6C1=(-1), env6C2=(-1),env6C3=(-1),noteBlok1=(-1), noteBlok2=(-1),noteBlok3=(-1), noteBlok4=(-1),noteBlok5=(-1), noteBlok6=(-1), dn0=(-1),dn1=(-1),dn2=(-1),dn3=(-1), dn4=(-1),dn5=(-1),dn6=(-1),dn7=(-1), dn8=(-1),dn9=(-1),dn10=(-1),dn11=(-1), dn12=(-1),dn13=(-1),dn14=(-1),dn15=(-1), dn16=(-1),dn17=(-1),dn18=(-1),dn19=(-1), dn20=(-1),dn21=(-1),dn22=(-1),dn23=(-1), dn24=(-1),dn25=(-1),dn26=(-1),dn27=(-1), dn28=(-1),dn29=(-1),dn30=(-1),dn31=(-1), dn32=(-1),dn33=(-1),dn34=(-1),dn35=(-1), dn36=(-1),dn37=(-1),dn38=(-1),dn39=(-1), dn40=(-1),dn41=(-1),detun1=(-1), detun2=(-1),detun3=(-1),detun4=(-1), detun5=(-1),detun6=(-1),modSens1=(-1), modSens2=(-1),modSens3=(-1),modSens4=(-1), modSens5=(-1),modSens6=(-1),outMult=(-1), osc_sync=(-1),
+gate = (1),transpose=(nil),gate1=(1),gate1Rel =(1), dx7_amp=(0.1),totVol=(nil),
+presetIndex= 0;
 
 
 var ctls, mods, chans, out, kilnod,
@@ -501,10 +502,7 @@ envAmp1, envEnv1, envAmp2, envEnv2, envAmp3, envEnv3 ,envAmp4, envEnv4, envAmp5,
 var huh, amp;
 
 // pitch = 97;
-
 // outBus=(0); pitch= (-1) ; gate = (-1); envPL0= (-1) ; envPL1= (-1) ; envPL2= (-1) ;envPL3= (-1) ; envPL4= (-1) ; envPR0= (-1) ;envPR1= (-1); envPR2= (-1) ;envPR3= (-1) ;coars1= (-1) ; fine_1=(-1);coars2=(-1);fine_2=(-1); coars3=(-1);fine_3=(-1);coars4=(-1); fine_4=(-1);coars5=(-1);fine_5=(-1); coars6=(-1);fine_6=(-1);env1L0=(-1); env1L1=(-1);env1L2=(-1);env1L3=(-1); env1L4=(-1);env1R0=(-1);env1R1=(-1); env1R2=(-1);env1R3=(-1);env1C0=(-1); env1C1=(-1);env1C2=(-1);env1C3=(-1); env2L0=(-1);env2L1=(-1);env2L2=(-1); env2L3=(-1);env2L4=(-1);env2R0=(-1); env2R1=(-1);env2R2=(-1);env2R3=(-1); env2C0=(-1);env2C1=(-1);env2C2=(-1); env2C3=(-1);env3L0=(-1);env3L1=(-1); env3L2=(-1);env3L3=(-1);env3L4=(-1); env3R0=(-1);env3R1=(-1);env3R2=(-1); env3R3=(-1);env3C0=(-1);env3C1=(-1); env3C2=(-1);env3C3=(-1);env4L0=(-1); env4L1=(-1);env4L2=(-1);env4L3=(-1); env4L4=(-1);env4R0=(-1);env4R1=(-1); env4R2=(-1);env4R3=(-1);env4C0=(-1); env4C1=(-1);env4C2=(-1);env4C3=(-1); env5L0=(-1);env5L1=(-1);env5L2=(-1); env5L3=(-1);env5L4=(-1);env5R0=(-1); env5R1=(-1);env5R2=(-1);env5R3=(-1); env5C0=(-1);env5C1=(-1);env5C2=(-1); env5C3=(-1);env6L0=(-1);env6L1=(-1); env6L2=(-1);env6L3=(-1);env6L4=(-1); env6R0=(-1);env6R1=(-1);env6R2=(-1); env6R3=(-1);env6C0=(-1);env6C1=(-1); env6C2=(-1);env6C3=(-1);noteBlok1=(-1); noteBlok2=(-1);noteBlok3=(-1); noteBlok4=(-1);noteBlok5=(-1); noteBlok6=(-1); dn0=(-1);dn1=(-1);dn2=(-1);dn3=(-1); dn4=(-1);dn5=(-1);dn6=(-1);dn7=(-1); dn8=(-1);dn9=(-1);dn10=(-1);dn11=(-1); dn12=(-1);dn13=(-1);dn14=(-1);dn15=(-1); dn16=(-1);dn17=(-1);dn18=(-1);dn19=(-1); dn20=(-1);dn21=(-1);dn22=(-1);dn23=(-1); dn24=(-1);dn25=(-1);dn26=(-1);dn27=(-1); dn28=(-1);dn29=(-1);dn30=(-1);dn31=(-1); dn32=(-1);dn33=(-1);dn34=(-1);dn35=(-1); dn36=(-1);dn37=(-1);dn38=(-1);dn39=(-1); dn40=(-1);dn41=(-1);detun1=(-1); detun2=(-1);detun3=(-1);detun4=(-1); detun5=(-1);detun6=(-1);modSens1=(-1); modSens2=(-1);modSens3=(-1);modSens4=(-1); modSens5=(-1);modSens6=(-1);outMult=(-1); osc_sync=(-1);transpose=(-1);gate1=(-1);gate1Rel =(-1); dx7_amp=(-1);totVol=(-1); 
-outMult = -1;
-
 
 // pitch=(-1); gate=(-1);
 
@@ -518,8 +516,8 @@ outMult = -1;
 // h = {arg param, i; Select.kr((param+1).clip(0,1), [preset_values[i], param]); };
 amp = dx7_amp;
 
-// h = {arg param, i; Select.kr((param+1).clip(0,1), [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
-h = {arg param, i; Select.kr(0, [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
+h = {arg param, i; Select.kr((param+1).clip(0,1), [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
+// h = {arg param, i; Select.kr(0, [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
 
 outMult = h.value(outMult, 0);
 dn0 = h.value(dn0, 1);
@@ -746,6 +744,8 @@ out = Mix.new([ // this is how the synthdef mutes channels - all are summed, but
 FreeSelfWhenDone.kr(Line.kr(0, 1, 10));
 kilnod = DetectSilence.ar(out, 0.01, 0.2, doneAction:2);
 out = out / outMult;
+
+
 Out.ar(outBus, out.dup);
 }).add;
 )
