@@ -19,6 +19,8 @@
 //                      E.g. \eglevel13 is setting the value of the 3rd stage of the first operator's envelope.
 // \egrateNX   Float    Value for each of the envelope rates. N = operator index, X = envelope stage.
 SynthDef(\fmx7, {
+    // var amp, spread, out, pan, gate, dur, line, freq, legato, attack, decay, sustain, release, env, levels, amps, ratios, detunes, modsenses, lfomode, lfofreq, lfodepth, lfo, envs, ctls, mods;
+
 	var amp = \amp.kr(1) * (-12.dbamp);
 	var spread = \spread.kr(0.8);
 	var out = \out.kr(0);

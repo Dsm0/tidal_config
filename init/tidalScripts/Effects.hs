@@ -54,7 +54,7 @@ let p_bpe = parseBP_E
     make_eff 'p' i = plysl (1 + val) where val = p_bpe i
     make_eff 'P' i = plyWith (1 + val) ((|* speed (3/2)) . (|* gain (9/10)) ) where val = p_bpe i
     make_eff 'a' i = (|* accelerate (val/8)) where val = p_bpe i
-    make_eff 'A' i = (|+ soundin ("2" * val)) where val = p_bpe i
+    make_eff 'A' i = (|+ gate (("2"+val) / 10)) where val = p_bpe i
     make_eff 's' i = (slow (val + 1)) where val = p_bpe i
     make_eff 'S' i = (# shape (0 + (val-1)/1000)) where val = p_bpe ii
                                                         ii = if (read i :: Integer) > (999) then ("999") else i
