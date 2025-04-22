@@ -397,7 +397,7 @@ Out Amps =  [ 1, 0, 1, 0, 0, 0 ]
 });
 // ~dx7_control_bus = Bus.control(s, 175);
 ~dx7_preset_buffer = Buffer.alloc(s, ~dx7_presetCount * ~dx7_presets_values[0].size, 1); // 4 presets with 4 parameters each
-~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
+// ~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
 // ~dx7_control_bufs = Bus.control(s, 174);
 
 
@@ -429,7 +429,10 @@ Out.ar(~dx7_busMeAmp, lfoAmp)
 
 }).add; 
 
-
+fork {
+	1.wait;
+	~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
+};
 
 (
 /* -- DX7 Synth -- use 'addToTail' when instantiating this synth */ 
@@ -744,6 +747,7 @@ out = Mix.new([ // this is how the synthdef mutes channels - all are summed, but
 FreeSelfWhenDone.kr(Line.kr(0, 1, 10));
 kilnod = DetectSilence.ar(out, 0.01, 0.2, doneAction:2);
 out = out / outMult;
+
 
 
 Out.ar(outBus, out.dup);
