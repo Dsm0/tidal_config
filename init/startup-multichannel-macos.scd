@@ -117,6 +117,7 @@ s.waitForBoot {
 
 	MIDIClient.init;
 	~midiOut = MIDIOut.newByName("IAC Driver", "Tidal1");
+	~midiOut.latency = 0.05;
 	~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
 
 
@@ -149,17 +150,18 @@ s.waitForBoot {
 	};
 
 
-
-
-
-
 };
-
 
 )
 
 
-
+(
+// reset fucked delay lines
+~dirt.orbits.do { |x|
+	x.initNodeTree;
+}
+"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+);
 
 
 
@@ -182,13 +184,6 @@ s.waitForBoot {
 
 
 
-(
-// reset fucked delay lines
-~dirt.orbits.do { |x|
-	x.initNodeTree;
-}
-// "/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
-);
 
 
 // "/home/ick/.config/tidal/init/pulu_clock.scd".load;
@@ -492,5 +487,7 @@ a = [10, 20, 30, 40, 50, 60];
 
 ~loadedData.postln;
 
-
+s.dumpOSC(0)
 Help.gui
+
+"/Users/will/.config/tidal/init/synths/SC-808.scd".load;

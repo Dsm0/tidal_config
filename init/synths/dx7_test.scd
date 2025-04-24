@@ -108,6 +108,8 @@ pitch = freq * speed * (1 + (accelerate * Line.ar(begin, end, dur, doneAction: D
 // h = {arg param, i; Select.kr((param+1).clip(0,1), [preset_values[i], param]); };
 amp = dx7_amp;
 
+presetIndex = presetIndex.wrap(0, ~dx7_presetCount-1);
+
 h = {arg param, i; Select.kr((param+1).clip(0,1), [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
 // h = {arg param, i; Select.kr(0, [BufRd.kr(1, ~dx7_preset_buffer, i + (presetIndex * 175)), param]); };
 
