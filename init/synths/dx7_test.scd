@@ -1,22 +1,5 @@
-/* analysis file written by DX7-P with write flag. see example.scd for explanation. */ 
-
-/*
-Ctls =  [ [ 0.65, 0.0, 0.92749157839181 ], [ 97.936358995437, 0.0, 0.12589254052719 ], [ 97.32230220046, 0.0, 0.92749157839181 ], [ 97.72652095046, 0.0, 0.3374478370851 ], [ 98.217608995437, 0.0, 0.12277312851816 ], [ 785.7408719635, 0.0, 0.057706305673827 ] ] 
-
-CM Ratios =  [ 149.72661876994, 150.34849376994, 150.67132153144, 151.10401383913, 1208.8321107131 ] 
-
-Mods =  [ [ 0, 12.566370614359, 0, 0, 0, 0 ], [ 0, 5.5417694409324, 0, 0, 0, 0 ], [ 0, 0, 0, 12.566370614359, 0, 0 ], [ 0, 0, 0, 0, 12.566370614359, 12.566370614359 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ] 
-
-ALGORITHM =  15 
-
-Out Amps =  [ 1, 0, 1, 0, 0, 0 ] 
-
-*/ 
 
 
-
-
-// ~dx7_control_bufs = Bus.control(s, 174);
 
 // full # of presets: 16384
 ~dx7_presetCount = 16384;
@@ -42,13 +25,6 @@ Out Amps =  [ 1, 0, 1, 0, 0, 0 ]
 
 
 
-
-
-
-
-
-
-
 /* -- LFO Synth for vibrato and tremolo -- instantiate this synth first */ 
 SynthDef( 'InfEfx_tst' , {
 arg out=0, gate = nil , lfoGet1 = 0, lfoGet2 = 1,
@@ -61,10 +37,12 @@ lfo = Osc.ar(lfo_wave,lfo_speed, lfo_phase, 0.5 * lfoGet2, 0.5 * lfoGet2) + LFNo
 lfo = lfo * EnvGen.ar(Env.asr(lfo_delay,releaseTime:0.01, curve: -5),envTrig);
 multiPitch = LinLin.ar(lfo, 0, 1, (pitchCons.neg.midiratio * tameM) + tameC, pitchCons.midiratio);
 lfoAmp = LinLin.ar(lfo, 0, 1, lfo_amd * (-3/4), 0);
+
+// multiPitch = DC.ar(0.0);
 FreeSelf.kr(gate);
 
-Out.ar(~dx7_busMePitch, multiPitch);
-Out.ar(~dx7_busMeAmp, lfoAmp)
+ReplaceOut.ar(~dx7_busMePitch, multiPitch);
+ReplaceOut.ar(~dx7_busMeAmp, lfoAmp)
 
 }).add; 
 
@@ -88,24 +66,11 @@ presetIndex= 0, pan=0, freq=190, speed=1, begin=0, end=1, accelerate=0, dur=1;
 
 var ctls, mods, chans, sig, kilnod,
 envAmp1, envEnv1, envAmp2, envEnv2, envAmp3, envEnv3 ,envAmp4, envEnv4, envAmp5, envEnv5, envAmp6, envEnv6, dca, envAmpP, envEnvP,presetParams;
-var huh, amp, pitch;
+var huh, amp, pitch, busMePitch, busMeAmp;
 
 
 pitch = freq * speed * (1 + (accelerate * Line.ar(begin, end, dur, doneAction: Done.freeSelf)));
 
-// pitch = 97;
-// outBus=(0); pitch= (-1) ; gate = (-1); envPL0= (-1) ; envPL1= (-1) ; envPL2= (-1) ;envPL3= (-1) ; envPL4= (-1) ; envPR0= (-1) ;envPR1= (-1); envPR2= (-1) ;envPR3= (-1) ;coars1= (-1) ; fine_1=(-1);coars2=(-1);fine_2=(-1); coars3=(-1);fine_3=(-1);coars4=(-1); fine_4=(-1);coars5=(-1);fine_5=(-1); coars6=(-1);fine_6=(-1);env1L0=(-1); env1L1=(-1);env1L2=(-1);env1L3=(-1); env1L4=(-1);env1R0=(-1);env1R1=(-1); env1R2=(-1);env1R3=(-1);env1C0=(-1); env1C1=(-1);env1C2=(-1);env1C3=(-1); env2L0=(-1);env2L1=(-1);env2L2=(-1); env2L3=(-1);env2L4=(-1);env2R0=(-1); env2R1=(-1);env2R2=(-1);env2R3=(-1); env2C0=(-1);env2C1=(-1);env2C2=(-1); env2C3=(-1);env3L0=(-1);env3L1=(-1); env3L2=(-1);env3L3=(-1);env3L4=(-1); env3R0=(-1);env3R1=(-1);env3R2=(-1); env3R3=(-1);env3C0=(-1);env3C1=(-1); env3C2=(-1);env3C3=(-1);env4L0=(-1); env4L1=(-1);env4L2=(-1);env4L3=(-1); env4L4=(-1);env4R0=(-1);env4R1=(-1); env4R2=(-1);env4R3=(-1);env4C0=(-1); env4C1=(-1);env4C2=(-1);env4C3=(-1); env5L0=(-1);env5L1=(-1);env5L2=(-1); env5L3=(-1);env5L4=(-1);env5R0=(-1); env5R1=(-1);env5R2=(-1);env5R3=(-1); env5C0=(-1);env5C1=(-1);env5C2=(-1); env5C3=(-1);env6L0=(-1);env6L1=(-1); env6L2=(-1);env6L3=(-1);env6L4=(-1); env6R0=(-1);env6R1=(-1);env6R2=(-1); env6R3=(-1);env6C0=(-1);env6C1=(-1); env6C2=(-1);env6C3=(-1);noteBlok1=(-1); noteBlok2=(-1);noteBlok3=(-1); noteBlok4=(-1);noteBlok5=(-1); noteBlok6=(-1); dn0=(-1);dn1=(-1);dn2=(-1);dn3=(-1); dn4=(-1);dn5=(-1);dn6=(-1);dn7=(-1); dn8=(-1);dn9=(-1);dn10=(-1);dn11=(-1); dn12=(-1);dn13=(-1);dn14=(-1);dn15=(-1); dn16=(-1);dn17=(-1);dn18=(-1);dn19=(-1); dn20=(-1);dn21=(-1);dn22=(-1);dn23=(-1); dn24=(-1);dn25=(-1);dn26=(-1);dn27=(-1); dn28=(-1);dn29=(-1);dn30=(-1);dn31=(-1); dn32=(-1);dn33=(-1);dn34=(-1);dn35=(-1); dn36=(-1);dn37=(-1);dn38=(-1);dn39=(-1); dn40=(-1);dn41=(-1);detun1=(-1); detun2=(-1);detun3=(-1);detun4=(-1); detun5=(-1);detun6=(-1);modSens1=(-1); modSens2=(-1);modSens3=(-1);modSens4=(-1); modSens5=(-1);modSens6=(-1);outMult=(-1); osc_sync=(-1);transpose=(-1);gate1=(-1);gate1Rel =(-1); dx7_amp=(-1);totVol=(-1); 
-
-// pitch=(-1); gate=(-1);
-
-// var preset_values = BufRd.kr(~dx7_preset_buffer.numChannels, ~dx7_preset_buffer, presetIndex * ~dx7_preset_buffer.numChannels,0,0);
-// var preset_values = BufRd.kr(~dx7_preset_buffer.numChannels, ~dx7_preset_buffer, presetIndex * 175,0,0);
-// var preset_values = BufRd.kr(~dx7_preset_buffer.numChannels, ~dx7_preset_buffer, presetIndex * ~dx7_preset_buffer.numChannels,0,0);
-// var preset_values = BufRd.kr(~dx7_preset_buffer.numChannels, ~dx7_preset_buffer, presetIndex * 175,0,0);
-// var hh = BufRd.kr(1, ~dx7_preset_buffer, 2,0,0);
-// var preset_values = BufRd.kr(1, ~dx7_preset_buffer, presetIndex * 175,0,0);
-// preset_values.poll;
-// h = {arg param, i; Select.kr((param+1).clip(0,1), [preset_values[i], param]); };
 amp = dx7_amp;
 
 presetIndex = presetIndex.wrap(0, ~dx7_presetCount-1);
@@ -157,6 +122,7 @@ dn39 = h.value(dn39, 40);
 dn40 = h.value(dn40, 41);
 dn41 = h.value(dn41, 42);
 // pitch = h.value(pitch, 43);
+
 amp = h.value(amp, 44);
 coars1 = h.value(coars1, 45);
 fine_1 = h.value(fine_1, 46);
@@ -306,14 +272,21 @@ envAmp5 = EnvGen.kr(envEnv5, gate, doneAction:0 );
 envEnv6 = Env.new([(-1 * env6L0).dbamp ,(-1 * env6L1).dbamp, (-1 * env6L2).dbamp, (-1 * env6L3).dbamp, (-1 * env6L4).dbamp], [env6R0,env6R1,env6R2,env6R3], [env6C0,env6C1,env6C2,env6C3], 3);
 envAmp6 = EnvGen.kr(envEnv6, gate, doneAction:0 );
 
+
+busMePitch = Lag2.ar(In.ar(~dx7_busMePitch),0.01);
+busMeAmp = Lag2.ar(In.ar(~dx7_busMeAmp),0.01);
+
+
 ctls = [
-[coars1 * fine_1 * ((pitch * noteBlok1) + ((detun1-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp1 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens1/3)).dbamp],
-[coars2 * fine_2 * ((pitch  * noteBlok2) + ((detun2-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp2 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens2/3)).dbamp],
-[coars3 * fine_3 * ((pitch * noteBlok3) + ((detun3-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp3 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens3/3)).dbamp],
-[coars4 * fine_4 * ((pitch  * noteBlok4) + ((detun4-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp4 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens4/3)).dbamp],
-[coars5 * fine_5 * ((pitch  * noteBlok5) + ((detun5-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp5 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens5/3)).dbamp],
-[coars6 * fine_6 * ((pitch  * noteBlok6) + ((detun6-7)/32)) * (envAmpP.midiratio) * Lag2.ar(In.ar(~dx7_busMePitch),0.01),  Rand(0,2pi) * osc_sync, envAmp6 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens6/3)).dbamp]
+[coars1 * fine_1 * ((pitch * noteBlok1) + ((detun1-7)/32)) * (envAmpP.midiratio) * busMePitch,  Rand(0,2pi) * osc_sync, envAmp1 * (busMeAmp * (modSens1/3)).dbamp],
+[coars2 * fine_2 * ((pitch  * noteBlok2) + ((detun2-7)/32)) * (envAmpP.midiratio) * busMePitch,  Rand(0,2pi) * osc_sync, envAmp2 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens2/3)).dbamp],
+[coars3 * fine_3 * ((pitch * noteBlok3) + ((detun3-7)/32)) * (envAmpP.midiratio) *  busMePitch,  Rand(0,2pi) * osc_sync, envAmp3 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens3/3)).dbamp],
+[coars4 * fine_4 * ((pitch  * noteBlok4) + ((detun4-7)/32)) * (envAmpP.midiratio) * busMePitch,  Rand(0,2pi) * osc_sync, envAmp4 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens4/3)).dbamp],
+[coars5 * fine_5 * ((pitch  * noteBlok5) + ((detun5-7)/32)) * (envAmpP.midiratio) * busMePitch,  Rand(0,2pi) * osc_sync, envAmp5 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens5/3)).dbamp],
+[coars6 * fine_6 * ((pitch  * noteBlok6) + ((detun6-7)/32)) * (envAmpP.midiratio) * busMePitch,  Rand(0,2pi) * osc_sync, envAmp6 * (Lag2.ar(In.ar(~dx7_busMeAmp),0.01) * (modSens6/3)).dbamp]
 ];
+
+// In.ar(~dx7_busMePitch).poll;
 
 mods = [
 [dn0, dn1, dn2, dn3, dn4, dn5],
@@ -344,6 +317,3 @@ OffsetOut.ar(out, DirtPan.ar((sig) * 4.dbamp, ~dirt.numChannels, pan));
 // Out.ar(out, sig.dup);
 }).add;
 )
-
-
-

@@ -166,6 +166,9 @@ s.waitForBoot {
 );
 
 
+(
+"/Users/will/.config/tidal/init/synths/dx7_test.scd".load;
+)
 
 
 

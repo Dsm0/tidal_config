@@ -22,7 +22,7 @@
     var envLength = sustain*(end-begin)/speed;
     var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
     var env = Env.asr;
-    var volume = IEnvGen.ar(env, line, doneAction: Done.freeSelf);
+    var volume = IEnvGen.ar(env, line);
     var sig;
 
     freq = max(0, freq * speed * (1 + (accelerate * line)));
@@ -38,7 +38,7 @@
     var envLength = sustain*(end-begin)/speed;
     var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
     var env = Env.asr;
-    var volume = IEnvGen.ar(env, line,doneAction: Done.freeSelf);
+    var volume = IEnvGen.ar(env, line);
     var sig;
 
     freq = max(0, freq * speed * (1 + (accelerate * line)));
