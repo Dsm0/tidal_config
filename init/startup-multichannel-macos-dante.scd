@@ -9,8 +9,8 @@ s.options.numBuffers = 1024 * 256 * 2; // increase this if you need to load more
 s.options.memSize = 8192 * 32 * 2; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 1024 * 32 * 2; // increase this if you are getting drop outs and the message "too many nodes"
 
-s.options.numOutputBusChannels = 20; // set this to your hardware output channel size, if necessary
-s.options.numInputBusChannels = 20; // set this to your hardware output channel size, if necessary
+s.options.numOutputBusChannels = 64; // set this to your hardware output channel size, if necessary
+s.options.numInputBusChannels = 64; // set this to your hardware output channel size, if necessary
 // boot the server and start SuperDirt
 // s.options.sampleRate = 44100;
 s.waitForBoot {
@@ -29,7 +29,8 @@ s.waitForBoot {
 	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 	// s.sync; // optionally: wait for samples to be read
 
-	~dirt.start(57120,outBusses: (0..31).collect({|i| i*2}));   // start listening on port 57119, create two busses each sending audio to channel 0
+
+	~dirt.start(57120,outBusses: (0..63).collect({|i| i*2}));   // start listening on port 57119, create two busses each sending audio to channel 0
 	// Each orbit (d1-d8) is mapped to SC-1 thru SC-8 in bitwig.
 	// the index values are incremented by 2 because each orbit takes 2 audio channels
 
@@ -157,12 +158,11 @@ s.waitForBoot {
 
 
 (
-//hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 // reset fucked delay lines
 ~dirt.orbits.do { |x|
 	x.initNodeTree;
 };
-// "/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
+"/Users/will/.config/tidal/init/synths/superDirtControls.scd".load;
 );
 
 
@@ -539,3 +539,8 @@ Quarks.install("Unit-Lib")
 Quarks.gui
 
 Document.gui
+
+(0..31).collect({|i|
+    i*2
+});
+

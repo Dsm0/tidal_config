@@ -465,6 +465,9 @@ Synth("DX7_tst");
 // ~dx7_preset_buffer.setn(0, Array.fill(~dx7_presets_values[0].size, { rrand(0,1) }));
 ~dx7_preset_buffer.setn(0, );
 
+
+s.dumpOSC(1)
+
 ~dx7_preset_buffer.plot;
 
 ~dx7_preset_buffer.setn(0, ~dx7_presets_values.flat);
