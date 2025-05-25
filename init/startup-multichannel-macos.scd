@@ -5,9 +5,13 @@ ServerOptions
 (
 // configure the sound server: here you could add hardware specific options
 // see http://doc.sccode.org/Classes/ServerOptions.html
-s.options.numBuffers = 1024 * 256 * 2; // increase this if you need to load more samples
-s.options.memSize = 8192 * 32 * 2; // increase this if you get "alloc failed" messages
-s.options.maxNodes = 1024 * 32 * 2; // increase this if you are getting drop outs and the message "too many nodes"
+s.options.numBuffers = 1024 * 256 * 4; // increase this if you need to load more samples
+s.options.memSize = 8192 * 32 * 4; // increase this if you get "alloc failed" messages
+s.options.maxNodes = 1024 * 32 * 4; // increase this if you are getting drop outs and the message "too many nodes"
+
+// EXPERIMENTAL ZONE
+s.options.blockSize = 128;
+// END EXPERIMENTAL ZONE
 
 s.options.numOutputBusChannels = 20; // set this to your hardware output channel size, if necessary
 s.options.numInputBusChannels = 20; // set this to your hardware output channel size, if necessary
@@ -135,25 +139,32 @@ s.waitForBoot {
     //         x.initNodeTree;
 	// };
 	fork {
-			~dirt.orbits.do { |x|
-			            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
-			            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
-					    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
-			            x.globalEffects = x.globalEffects
-			              .addFirst(clouds)
-			              .addFirst(verb)
-					       .addFirst(warps);
-			            x.initNodeTree;
-				};
+		~dirt.orbits.do { |x|
+		            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+		            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+				    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+		            x.globalEffects = x.globalEffects
+		              .addFirst(clouds)
+		              .addFirst(verb)
+			       .addFirst(warps);
+		            x.initNodeTree;
+			};
 
-			SynthDef(\p, {|out, freq = 440, pan = 0, amp = 0.1|
-			}).add;
+		SynthDef(\p, {|out, freq = 440, pan = 0, amp = 0.1|
+		}).add;
 	};
 
 
 };
 
 )
+
+
+
+
+
+
+~dirt.orbits[0].globalEffects.do {|x| x.postln};
 
 
 (
@@ -169,6 +180,40 @@ s.waitForBoot {
 (
 "/Users/will/.config/tidal/init/synths/dx7_test.scd".load;
 )
+
+
+
+
+
+
+
+
+
+  (
+		~dirt.orbits.do { |x|
+		            var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+		            var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+				    var warps = GlobalDirtEffect(\warps, [\warpsalgo, \warpstimb, \warpsosc, \warpsfreq, \warpsvgain, \warpseasteregg, \out]);
+		            x.globalEffects = x.globalEffects
+		              .addFirst(clouds)
+		              .addFirst(verb)
+			       .addFirst(warps);
+		            x.initNodeTree;
+			};
+
+		SynthDef(\p, {|out, freq = 440, pan = 0, amp = 0.1|
+		}).add;
+  )
+
+
+
+
+
+
+
+
+
+
 
 
 

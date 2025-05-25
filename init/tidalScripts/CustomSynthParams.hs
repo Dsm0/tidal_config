@@ -534,7 +534,10 @@ let begin = pF "begin"
     speed = pF "speed"
     totVol = pF "totVol"
     transpose = pF "transpose"
-    dx7 = stack ["DX7_tst", shiftBy ("1"/128) $ "InfEfx_tst"]
+    pitchCons = pF "pitchCons"
+    tameM = pF "tameM"
+    tameC = pF "tameC"
+    dx7 = stack ["DX7_tst", shiftBy ("2"/128) $ "InfEfx_tst" # orbit 10 ]
 :}
     
  

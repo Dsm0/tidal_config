@@ -2,6 +2,7 @@ import Sound.Tidal.Context
 -- import Control.Concurrent (threadDelay)
 -- import Control.Concurrent.MVar (readMVar) import qualified Control.Monad as CM
 import qualified Sound.Tidal.Stream
+import qualified Sound.Tidal.Clock as C
 -- import qualified Sound.Tidal.Tempo as T
 
 
@@ -133,7 +134,7 @@ let liveTargetDebug = Target {oName = "Max", -- Give your target a name
 import Data.List
 
 :{
-tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
+tidalTarget = superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120}
 :}
 
 -- :{
@@ -147,8 +148,23 @@ tidalTarget = superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 5
 --                                 ]
 -- :}
 
+
 :{
-tidal <- startStream (defaultConfig) 
+let tidalConfig = defaultConfig {
+      cClockConfig = C.defaultConfig {
+         C.cFrameTimespan = 1/20
+        ,C.cEnableLink = False
+        ,C.cProcessAhead = 6/10
+        ,C.cSkipTicks = 10
+        ,C.cQuantum = 4
+        ,C.cBeatsPerCycle = 4
+      }
+    }
+:}
+
+
+:{
+tidal <- startStream (tidalConfig) 
           [
           (tidalTarget,[superdirtShape,superdirtMessageOSC])
           , (oscdumpTarget,[oscdumpOSC])
